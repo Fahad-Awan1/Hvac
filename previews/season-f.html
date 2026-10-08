@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section F — Light Editorial (static)</title>
+<link rel="icon" href="../assets/img/logo-mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/style.min.css">
+<style>
+  .pv-note { background: var(--bg-2); text-align: center; padding: 40px 16px; color: var(--muted); font-size: .85rem; }
+  .pv-note a { color: var(--green); font-weight: 700; text-decoration: underline; }
+
+  .edit { background: var(--surface); padding-block: clamp(70px, 9vw, 120px); }
+  .edit__grid { display: grid; grid-template-columns: 1.25fr .75fr; gap: clamp(32px, 5vw, 70px); align-items: stretch; }
+  .edit h2 { margin-bottom: 14px; }
+  .edit h2 em { color: var(--green-3); }
+  .edit__lead { color: var(--muted); max-width: 52ch; margin-bottom: 34px; }
+
+  .cards4 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .c4 { padding: 26px; border-radius: var(--r-lg); background: var(--bg); border: 1px solid var(--line); }
+  .c4__top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
+  .c4__icon { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; background: var(--tint); color: var(--ink-c); }
+  .c4__icon svg { width: 22px; height: 22px; }
+  .c4__tag { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .c4 h3 { font-size: 1.2rem; margin-bottom: 8px; }
+  .c4 p { font-size: .9rem; color: var(--muted); margin-bottom: 16px; }
+  .c4__stat { display: inline-block; padding: 6px 12px; border-radius: 99px; background: var(--surface); border: 1px solid var(--line); font-size: .8rem; font-weight: 700; color: var(--green); }
+
+  .edit__photo { position: relative; border-radius: var(--r-xl); overflow: hidden; min-height: 520px; }
+  .edit__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 60% center; }
+  .edit__quote { position: absolute; left: 18px; right: 18px; bottom: 18px; padding: 20px; border-radius: 20px; background: var(--green); color: #fff; }
+  .edit__quote p { font-size: .95rem; margin-bottom: 12px; }
+  .edit__quote b { display: block; font-size: .9rem; }
+  .edit__quote small { color: rgba(255, 255, 255, .65); }
+  .edit__quote .stars { margin-bottom: 8px; color: #f5b301; letter-spacing: 2px; }
+
+  @media (max-width: 1024px) { .edit__grid { grid-template-columns: 1fr; } .edit__photo { min-height: 440px; } }
+  @media (max-width: 640px) {
+    .cards4 { grid-template-columns: 1fr; gap: 12px; }
+    .c4 { padding: 20px; display: grid; grid-template-columns: 48px 1fr; column-gap: 16px; }
+    .c4__top { grid-row: span 3; flex-direction: column; align-items: flex-start; margin: 0; }
+    .c4__tag { display: none; }
+    .c4 p { margin-bottom: 10px; }
+    .c4__stat { justify-self: start; }
+    .edit__photo { min-height: 540px; border-radius: 22px; }
+    .edit__photo img { object-position: 62% 8%; }
+    .edit__quote { padding: 16px; }
+    .edit__quote p { font-size: .88rem; }
+  }
+</style>
+</head>
+<body>
+<p class="pv-note">Preview · Option F: Light editorial (fully static) · <a href="index.html">← all options</a></p>
+
+<section class="edit">
+  <div class="container edit__grid">
+    <div>
+      <p class="eyebrow">One partner, every season</p>
+      <h2>Whatever the weather, <em>home stays 72°.</em></h2>
+      <p class="edit__lead">One local team for everything that keeps your home comfortable: installed right, maintained properly, and backed by a 10-year warranty.</p>
+      <div class="cards4">
+        <article class="c4" style="--tint:#fff1e3;--ink-c:#d9621e">
+          <div class="c4__top"><span class="c4__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 2v20M3.3 7l17.4 10M3.3 17 20.7 7"/></svg></span><span class="c4__tag">Summer</span></div>
+          <h3>Cooling</h3>
+          <p>Quiet, high-efficiency AC sized precisely to your home.</p>
+          <span class="c4__stat">Up to 26 SEER2</span>
+        </article>
+        <article class="c4" style="--tint:#e3f2fb;--ink-c:#1f7fb8">
+          <div class="c4__top"><span class="c4__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 22c4 0 7-2.8 7-7 0-4.5-3.5-7-4.5-11-2 1.5-3.5 4-3.5 6.5C9.5 9 9 7.5 9 6c-2.5 2-4 5.3-4 9 0 4.2 3 7 7 7Z"/></svg></span><span class="c4__tag">Winter</span></div>
+          <h3>Heating</h3>
+          <p>Furnaces &amp; heat pumps, safety-checked on every visit.</p>
+          <span class="c4__stat">98% AFUE</span>
+        </article>
+        <article class="c4" style="--tint:#eef8d4;--ink-c:#4c7a10">
+          <div class="c4__top"><span class="c4__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19C4 11 9 4 20 4c0 11-6 16-15 15Zm0 0 8-8"/></svg></span><span class="c4__tag">Spring</span></div>
+          <h3>Clean air</h3>
+          <p>HEPA filtration and UV purification for allergy season.</p>
+          <span class="c4__stat">99% allergens removed</span>
+        </article>
+        <article class="c4" style="--tint:#e2efe6;--ink-c:#0f3d26">
+          <div class="c4__top"><span class="c4__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7Z"/></svg></span><span class="c4__tag">All year</span></div>
+          <h3>Smart savings</h3>
+          <p>Smart thermostats and tune-ups that keep bills predictable.</p>
+          <span class="c4__stat">$480 saved / yr</span>
+        </article>
+      </div>
+    </div>
+
+    <figure class="edit__photo" style="margin:0">
+      <img src="../assets/img/tech-7-md.webp" srcset="../assets/img/tech-7-sm.webp 640w, ../assets/img/tech-7-md.webp 960w, ../assets/img/tech-7.webp 1200w" sizes="(max-width:1024px) 100vw, 35vw" alt="Smiling HVAC technician" loading="lazy">
+      <figcaption class="edit__quote">
+        <div class="stars">★★★★★</div>
+        <p>"Our AC died at 9pm in a heatwave. They were here by 10 and it was blowing cold by 11."</p>
+        <b>Sarah M.</b><small>AC repair · verified review</small>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<p class="pv-note">End of section · <a href="index.html">← all options</a></p>
+</body>
+</html>

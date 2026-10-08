@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Season Section B — Season Switcher</title>
+<link rel="icon" href="../assets/img/logo-mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/style.min.css">
+<style>
+  .pv-note { background: var(--bg); text-align: center; padding: 40px 16px; color: var(--muted); font-size: .85rem; }
+  .pv-note a { color: var(--green); font-weight: 700; text-decoration: underline; }
+
+  .switch { background: var(--green-deep); color: #fff; padding-block: clamp(70px, 9vw, 120px); }
+  .switch__grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(30px, 5vw, 70px); align-items: center; }
+  .switch h2 { margin-bottom: 30px; }
+  .switch h2 em { color: var(--lime); }
+
+  .tabs { display: grid; gap: 10px; }
+  .tab { text-align: left; width: 100%; padding: 16px 18px; border-radius: 18px; border: 1px solid rgba(255, 255, 255, .1); background: rgba(255, 255, 255, .03); color: #fff; transition: background-color .3s, border-color .3s; }
+  .tab:hover { background: rgba(255, 255, 255, .07); }
+  .tab[aria-selected="true"] { background: rgba(255, 255, 255, .08); border-color: var(--c); }
+  .tab__row { display: flex; align-items: center; gap: 14px; }
+  .tab__icon { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: rgba(255, 255, 255, .08); font-size: 1.1rem; flex: none; transition: background-color .3s; }
+  .tab[aria-selected="true"] .tab__icon { background: var(--c); }
+  .tab__row b { display: block; font-size: 1.05rem; }
+  .tab__row small { color: rgba(255, 255, 255, .6); font-size: .8rem; }
+  .tab__row .tab__out { margin-left: auto; font-weight: 800; color: var(--c); font-size: .9rem; white-space: nowrap; }
+  .tab__more { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .45s var(--ease); }
+  .tab__more > div { overflow: hidden; }
+  .tab[aria-selected="true"] .tab__more { grid-template-rows: 1fr; }
+  .tab__more p { color: rgba(255, 255, 255, .72); font-size: .92rem; margin: 12px 0 0 54px; }
+
+  .stage { position: relative; aspect-ratio: 5 / 4.2; border-radius: var(--r-xl); overflow: hidden; background: var(--green); box-shadow: 0 40px 80px -30px rgba(0, 0, 0, .6); }
+  .stage img.photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .6s ease; }
+  .stage img.photo.is-on { opacity: 1; }
+  .stage::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(5, 18, 12, .5), transparent 45%); pointer-events: none; }
+  .stage__out { position: absolute; z-index: 2; top: 18px; left: 18px; padding: 9px 15px; border-radius: 99px; background: rgba(0, 0, 0, .45); font-size: .85rem; font-weight: 700; color: var(--c); }
+  .stage__in { position: absolute; z-index: 2; top: 18px; right: 18px; display: inline-flex; align-items: center; gap: 8px; padding: 9px 15px; border-radius: 99px; background: #fff; color: var(--green-deep); font-weight: 800; font-size: .9rem; }
+  .stage__in i { width: 9px; height: 9px; border-radius: 50%; background: #22c55e; }
+  .stage__eq { position: absolute; z-index: 2; left: 18px; right: 18px; bottom: 18px; display: flex; align-items: center; gap: 14px; padding: 12px; border-radius: 18px; background: rgba(255, 255, 255, .95); color: var(--ink); }
+  .stage__eq img { width: 60px; height: 52px; border-radius: 12px; object-fit: cover; }
+  .stage__eq small { display: block; font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--green-3); }
+  .stage__eq b { font-size: 1rem; }
+  .stage__eq a { margin-left: auto; font-weight: 700; font-size: .85rem; color: var(--green); white-space: nowrap; }
+
+  .mobile-desc { display: none; }
+  @media (max-width: 1024px) { .switch__grid { grid-template-columns: 1fr; } .stage { order: -1; } }
+  @media (max-width: 640px) {
+    .switch h2 { margin-bottom: 18px; }
+    /* phones: compact pill tabs under the photo */
+    .tabs { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+    .tab { padding: 10px 4px; text-align: center; border-radius: 14px; }
+    .tab__row { flex-direction: column; gap: 6px; }
+    .tab__row small, .tab__row .tab__out, .tab__more { display: none; }
+    .tab__row b { font-size: .78rem; }
+    .tab__icon { width: 34px; height: 34px; }
+    .mobile-desc { display: block; margin-top: 16px; color: rgba(255, 255, 255, .75); font-size: .92rem; }
+    .stage { aspect-ratio: 4 / 3.6; border-radius: 22px; }
+    .stage__eq a { display: none; }
+    .stage__in { top: auto; bottom: 92px; right: auto; left: 18px; }
+  }
+</style>
+</head>
+<body>
+<p class="pv-note">Preview · Option B: Season switcher (click the seasons) · <a href="index.html">← all options</a></p>
+
+<section class="switch">
+  <div class="container switch__grid">
+    <div>
+      <p class="eyebrow eyebrow--light">One partner, every season</p>
+      <h2>Whatever the weather, <em>home stays 72°.</em></h2>
+      <div class="tabs" role="tablist" aria-label="Seasons">
+        <button class="tab" role="tab" aria-selected="true" style="--c:#ffb066" data-i="0"><span class="tab__row"><span class="tab__icon">☀</span><span><b>Summer</b><small>Cooling</small></span><span class="tab__out">98°F out</span></span><span class="tab__more"><div><p>High-efficiency AC sized to your home — no hot rooms, no short cycling.</p></div></span></button>
+        <button class="tab" role="tab" aria-selected="false" style="--c:#8fd8ff" data-i="1"><span class="tab__row"><span class="tab__icon">❄</span><span><b>Winter</b><small>Heating</small></span><span class="tab__out">12°F out</span></span><span class="tab__more"><div><p>Furnaces and cold-climate heat pumps, safety-checked on every visit.</p></div></span></button>
+        <button class="tab" role="tab" aria-selected="false" style="--c:#e8f37a" data-i="2"><span class="tab__row"><span class="tab__icon">🌸</span><span><b>Spring</b><small>Clean air</small></span><span class="tab__out">High pollen</span></span><span class="tab__more"><div><p>HEPA filtration and UV purification remove up to 99% of allergens.</p></div></span></button>
+        <button class="tab" role="tab" aria-selected="false" style="--c:#c6f432" data-i="3"><span class="tab__row"><span class="tab__icon">🌙</span><span><b>All year</b><small>Smart savings</small></span><span class="tab__out">−30% energy</span></span><span class="tab__more"><div><p>Smart thermostats and tune-ups that keep bills low and predictable.</p></div></span></button>
+      </div>
+      <p class="mobile-desc" aria-live="polite">High-efficiency AC sized to your home — no hot rooms, no short cycling.</p>
+    </div>
+
+    <div class="stage" style="--c:#ffb066">
+      <img class="photo is-on" src="../assets/img/home-summer-md.webp" srcset="../assets/img/home-summer-sm.webp 760w, ../assets/img/home-summer-md.webp 1100w, ../assets/img/home-summer.webp 1600w" sizes="(max-width:1024px) 100vw, 55vw" alt="Family home on a hot summer day">
+      <img class="photo" src="../assets/img/home-winter-md.webp" srcset="../assets/img/home-winter-sm.webp 760w, ../assets/img/home-winter-md.webp 1100w, ../assets/img/home-winter.webp 1600w" sizes="(max-width:1024px) 100vw, 55vw" alt="Family home covered in snow" loading="lazy">
+      <img class="photo" src="../assets/img/home-spring-md.webp" srcset="../assets/img/home-spring-sm.webp 760w, ../assets/img/home-spring-md.webp 1100w, ../assets/img/home-spring.webp 1600w" sizes="(max-width:1024px) 100vw, 55vw" alt="Home behind blossoming spring trees" loading="lazy">
+      <img class="photo" src="../assets/img/home-evening-md.webp" srcset="../assets/img/home-evening-sm.webp 760w, ../assets/img/home-evening-md.webp 1100w, ../assets/img/home-evening.webp 1600w" sizes="(max-width:1024px) 100vw, 55vw" alt="Home glowing warmly at dusk" loading="lazy">
+      <span class="stage__out" data-out>☀ 98°F outside</span>
+      <span class="stage__in"><i></i><span data-in>Inside 72°F</span></span>
+      <div class="stage__eq"><img data-eq-img src="../assets/img/ac-units-sm.webp" alt=""><div><small>Running now</small><b data-eq>Central AC · 26 SEER2</b></div><a href="../services.html#cooling" data-eq-link>Learn more →</a></div>
+    </div>
+  </div>
+</section>
+
+<p class="pv-note">End of section · <a href="index.html">← all options</a></p>
+
+<script>
+  const DATA = [
+    { c: '#ffb066', out: '☀ 98°F outside', in: 'Inside 72°F', eq: 'Central AC · 26 SEER2', img: 'ac-units-sm', link: '../services.html#cooling' },
+    { c: '#8fd8ff', out: '❄ 12°F outside', in: 'Inside 72°F', eq: 'Furnace · 98% AFUE', img: 'tech-4-sm', link: '../services.html#heating' },
+    { c: '#e8f37a', out: '🌸 Pollen count high', in: 'Inside: clean air', eq: 'HEPA + UV purification', img: 'purifier-sm', link: '../services.html#air' },
+    { c: '#c6f432', out: '🌙 Every evening', in: 'Inside 72°F, on autopilot', eq: 'Smart thermostat', img: 'thermostat-sm', link: '../services.html#smart' },
+  ];
+  const tabs = [...document.querySelectorAll('.tab')];
+  const photos = [...document.querySelectorAll('.stage .photo')];
+  const stage = document.querySelector('.stage');
+  const q = (s) => document.querySelector(s);
+  function select(i) {
+    const d = DATA[i];
+    tabs.forEach((t, k) => t.setAttribute('aria-selected', String(k === i)));
+    photos.forEach((p, k) => p.classList.toggle('is-on', k === i));
+    stage.style.setProperty('--c', d.c);
+    q('[data-out]').textContent = d.out;
+    q('[data-in]').textContent = d.in;
+    q('[data-eq]').textContent = d.eq;
+    q('[data-eq-img]').src = `../assets/img/${d.img}.webp`;
+    q('[data-eq-link]').href = d.link;
+    q('.mobile-desc').textContent = tabs[i].querySelector('.tab__more p').textContent;
+  }
+  tabs.forEach((t, i) => t.addEventListener('click', () => select(i)));
+  // arrow keys move between tabs
+  document.querySelector('.tabs').addEventListener('keydown', (e) => {
+    const cur = tabs.findIndex((t) => t.getAttribute('aria-selected') === 'true');
+    const n = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? -1 : 0;
+    if (!n) return;
+    e.preventDefault();
+    const i = (cur + n + tabs.length) % tabs.length;
+    select(i); tabs[i].focus();
+  });
+</script>
+</body>
+</html>

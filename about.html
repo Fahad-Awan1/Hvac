@@ -14,7 +14,7 @@
 <link rel="icon" href="assets/img/logo-mark.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/instrument-serif-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/style.min.css?v=5ca2593b">
+<link rel="stylesheet" href="assets/css/style.min.css?v=441be5d4">
 <script>
   (function () {
     var d = document.documentElement;
@@ -39,6 +39,7 @@
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="i-up-right" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
     <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m3 7 9 6 9-6" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
@@ -104,7 +105,21 @@
     </a>
     <nav class="nav" aria-label="Primary">
       <a href="index.html" data-nav="home">Home</a>
-      <a href="services.html" data-nav="services">Services</a>
+      <div class="nav__item">
+        <a href="services.html" data-nav="services" class="nav__parent" aria-haspopup="true" aria-expanded="false">Services <svg class="ic nav__chev"><use href="#i-chev"/></svg></a>
+        <div class="nav__sub" aria-label="Services">
+          <div class="nav__subgrid">
+          <a href="services.html#cooling" class="nav__sublink"><span class="nav__subicon"><svg class="ic"><use href="#i-snow"/></svg></span><span><b>AC Installation &amp; Repair</b><small>Central AC &amp; ductless mini-splits</small></span></a>
+          <a href="services.html#heating" class="nav__sublink"><span class="nav__subicon"><svg class="ic"><use href="#i-flame"/></svg></span><span><b>Furnace &amp; Heating</b><small>Furnaces, boilers &amp; repairs</small></span></a>
+          <a href="services.html#heatpumps" class="nav__sublink"><span class="nav__subicon"><svg class="ic"><use href="#i-bolt"/></svg></span><span><b>Heat Pumps</b><small>Efficient heating &amp; cooling in one</small></span></a>
+          <a href="services.html#air" class="nav__sublink"><span class="nav__subicon"><svg class="ic"><use href="#i-leaf"/></svg></span><span><b>Indoor Air Quality</b><small>Purifiers, filters &amp; humidity</small></span></a>
+          <a href="services.html#ducts" class="nav__sublink"><span class="nav__subicon"><svg class="ic"><use href="#i-wind"/></svg></span><span><b>Ductwork &amp; Ventilation</b><small>Cleaning, sealing &amp; zoning</small></span></a>
+          <a href="services.html#smart" class="nav__sublink"><span class="nav__subicon"><svg class="ic"><use href="#i-thermo"/></svg></span><span><b>Smart Thermostats</b><small>Wi-Fi control &amp; zoning</small></span></a>
+          <a href="services.html#commercial" class="nav__sublink"><span class="nav__subicon"><svg class="ic"><use href="#i-building"/></svg></span><span><b>Commercial HVAC</b><small>Rooftop units, VRF &amp; contracts</small></span></a>
+          </div>
+          <a href="services.html" class="nav__suball">View all services <svg class="ic"><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
       <a href="projects.html" data-nav="projects">Projects</a>
       <a href="plans.html" data-nav="plans">Plans &amp; Pricing</a>
       <a href="about.html" data-nav="about" aria-current="page">About Us</a>
@@ -122,17 +137,35 @@
 
 <div class="menu" id="menu" aria-hidden="true">
   <div class="menu__inner container">
+    <p class="menu__label">Menu</p>
     <nav class="menu__nav" aria-label="Mobile">
-      <a href="index.html" data-nav="home"><span>01</span>Home</a>
-      <a href="services.html" data-nav="services"><span>02</span>Services</a>
-      <a href="projects.html" data-nav="projects"><span>03</span>Projects</a>
-      <a href="plans.html" data-nav="plans"><span>04</span>Plans &amp; Pricing</a>
-      <a href="about.html" data-nav="about" aria-current="page"><span>05</span>About Us</a>
-      <a href="contact.html" data-nav="contact"><span>06</span>Contact</a>
+      <a href="index.html" data-nav="home"><span class="menu__icon"><svg class="ic"><use href="#i-home"/></svg></span><span class="menu__text"><b>Home</b><small>Comfort, engineered</small></span><svg class="ic menu__arrow"><use href="#i-arrow"/></svg></a>
+      <div class="menu__group">
+        <button type="button" class="menu__row" data-nav="services" aria-expanded="false" aria-controls="menu-services"><span class="menu__icon"><svg class="ic"><use href="#i-fan"/></svg></span><span class="menu__text"><b>Services</b><small>AC, heating &amp; air quality</small></span><svg class="ic menu__arrow menu__chev"><use href="#i-chev"/></svg></button>
+        <div class="menu__sub" id="menu-services">
+          <div class="menu__sublist">
+            <a href="services.html" class="menu__suball">All services overview</a>
+          <a href="services.html#cooling"><svg class="ic"><use href="#i-snow"/></svg>AC Installation &amp; Repair</a>
+          <a href="services.html#heating"><svg class="ic"><use href="#i-flame"/></svg>Furnace &amp; Heating</a>
+          <a href="services.html#heatpumps"><svg class="ic"><use href="#i-bolt"/></svg>Heat Pumps</a>
+          <a href="services.html#air"><svg class="ic"><use href="#i-leaf"/></svg>Indoor Air Quality</a>
+          <a href="services.html#ducts"><svg class="ic"><use href="#i-wind"/></svg>Ductwork &amp; Ventilation</a>
+          <a href="services.html#smart"><svg class="ic"><use href="#i-thermo"/></svg>Smart Thermostats</a>
+          <a href="services.html#commercial"><svg class="ic"><use href="#i-building"/></svg>Commercial HVAC</a>
+          </div>
+        </div>
+      </div>
+      <a href="projects.html" data-nav="projects"><span class="menu__icon"><svg class="ic"><use href="#i-building"/></svg></span><span class="menu__text"><b>Projects</b><small>Homes &amp; businesses we've done</small></span><svg class="ic menu__arrow"><use href="#i-arrow"/></svg></a>
+      <a href="plans.html" data-nav="plans"><span class="menu__icon"><svg class="ic"><use href="#i-shield"/></svg></span><span class="menu__text"><b>Plans &amp; Pricing</b><small>Maintenance plans &amp; financing</small></span><svg class="ic menu__arrow"><use href="#i-arrow"/></svg></a>
+      <a href="about.html" data-nav="about" aria-current="page"><span class="menu__icon"><svg class="ic"><use href="#i-user"/></svg></span><span class="menu__text"><b>About Us</b><small>Our team &amp; story</small></span><svg class="ic menu__arrow"><use href="#i-arrow"/></svg></a>
+      <a href="contact.html" data-nav="contact"><span class="menu__icon"><svg class="ic"><use href="#i-mail"/></svg></span><span class="menu__text"><b>Contact</b><small>Book online or get in touch</small></span><svg class="ic menu__arrow"><use href="#i-arrow"/></svg></a>
     </nav>
     <div class="menu__foot">
-      <a href="tel:+15550142290" class="btn btn--lime">Call (555) 014-2290 <svg class="ic"><use href="#i-phone"/></svg></a>
-      <p>Mon–Sat 7am–8pm · Emergency line open 24/7</p>
+      <div class="menu__actions">
+        <a href="contact.html#book" class="btn btn--lime">Book a visit</a>
+        <a href="tel:+15550142290" class="btn menu__call"><svg class="ic"><use href="#i-phone"/></svg>Call 24/7</a>
+      </div>
+      <p class="menu__status"><span class="pulse-dot"></span>Technicians available today · Mon–Sat 7am–8pm</p>
     </div>
   </div>
 </div>
@@ -325,7 +358,7 @@
 
 
 <script src="assets/vendor/lenis.min.js" defer></script>
-<script src="assets/js/main.js?v=5ca2593b" defer></script>
-<script src="assets/js/chatbot.js?v=5ca2593b" defer></script>
+<script src="assets/js/main.js?v=441be5d4" defer></script>
+<script src="assets/js/chatbot.js?v=441be5d4" defer></script>
 </body>
 </html>

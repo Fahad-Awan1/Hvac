@@ -21,14 +21,14 @@ node build.mjs
 - `<x-img name="tech-1" alt="…">` becomes a responsive `<img>` with `srcset`, width/height and lazy-loading
 - Do **not** edit the root `*.html` files directly; they are overwritten on build.
 - Homepage hero thermostat: the headline/button text for each state (too cold / just right / too warm) lives in the `data-thermo-states` JSON block in `src/pages/index.html`; background photos are `assets/img/bg-cold|bg-ok|bg-hot(.webp / -sm.webp)`.
-- Homepage "Whatever the weather, home stays 72°" section: each season's badge, outside value, tag note, equipment name and tag position (`data-x` / `data-y`) are `data-` attributes on the `.story__season` figures in `src/pages/index.html`; photos are `assets/img/home-summer|winter|spring|evening`.
+- Homepage "Whatever the weather, home stays 72°" section (`.climate` in `src/pages/index.html`) is fully static: one photo (`home-evening`) and four stats you can edit directly in the HTML.
 
 ## Structure
 | Path | Purpose |
 |---|---|
 | `assets/css/style.css` | Design system, all sections, responsive rules |
 | `assets/js/main.js` | Smooth scroll, reveals, pinned/horizontal sections, cursor, calculators, quiz, booking, filters |
-| `assets/js/scenes.js` | Three.js scenes (fan, particle morph, house airflow), lazy-loaded only when visible |
+| `assets/js/scenes.js` | Three.js scenes (particle morph, house airflow) for inner pages, lazy-loaded after the page is interactive |
 | `assets/js/chatbot.js` | "Breeze" hardcoded chat assistant (edit `INTENTS` to change answers) |
 | `assets/vendor/` | Lenis + Three.js, served locally |
 | `assets/img/` | WebP images (`*-sm.webp` = 640px mobile versions) |

@@ -10,14 +10,14 @@
 
   <div class="container hero__inner">
     <div class="hero__copy">
-      <p class="hero__kicker" data-hero-in style="--d:0s"><i></i>How does your home feel right now?</p>
+      <p class="hero__kicker" data-hero-in style="--d:0s"><i></i><span>How does your home feel<span class="hide-sm"> right now</span>?</span></p>
       <div class="hero__swap" data-hero-in style="--d:0.08s">
         <h1 class="hero__title" data-thermo-title>Feels perfect? <em>Let's keep it that way.</em></h1>
         <p class="hero__lead" data-thermo-lead>Twice-yearly tune-ups prevent 85% of breakdowns. Join the Comfort Club from $19 a month.</p>
       </div>
       <div class="hero__actions" data-hero-in style="--d:0.16s">
         <a class="btn btn--accent magnetic" href="plans.html" data-thermo-cta><span>See maintenance plans</span> <svg class="ic"><use href="#i-arrow"/></svg></a>
-        <a class="hero__tel" href="tel:+15550142290">or call (555) 014-2290</a>
+        <a class="hero__tel" href="tel:+15550142290" aria-label="Call (555) 014-2290"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg><span>or call (555) 014-2290</span></a>
       </div>
       <p class="hero__note" data-hero-in style="--d:0.24s"><span><b>4.9★</b> from 1,280 reviews</span><span><b>Same-day</b> repairs</span><span><b>24/7</b> emergency line</span></p>
     </div>
@@ -102,76 +102,34 @@
   </div>
 </section>
 
-<!-- ============ STORY: one home, every season (sticky scroll) ============ -->
-<section class="story" id="story" data-story>
-  <div class="story__pin">
-    <div class="container story__wrap">
-      <div class="story__copy">
-        <div>
-          <p class="eyebrow eyebrow--light">One partner, every season</p>
-          <h2 class="story__title">Whatever the weather, <em>home stays 72°.</em></h2>
-        </div>
-        <div class="story__readout" aria-live="polite">
-          <div class="is-out"><small>Outside</small><b data-story-out>98°F</b></div>
-          <span aria-hidden="true">→</span>
-          <div class="is-in"><small>Inside</small><b>72°F</b></div>
-        </div>
-        <div class="story__cards">
-          <article class="story-card is-active">
-            <span class="story-card__num">01 / Cool</span>
-            <h3>Summer, sorted.</h3>
-            <p>High-efficiency AC and ductless mini-splits sized precisely to your home, so no hot rooms and no short cycling.</p>
-            <span class="chip"><svg class="ic"><use href="#i-snow"/></svg>Up to 26 SEER2</span>
-          </article>
-          <article class="story-card">
-            <span class="story-card__num">02 / Heat</span>
-            <h3>Winter, handled.</h3>
-            <p>Furnaces, boilers and cold-climate heat pumps that deliver even, cozy warmth, with safety checks on every visit.</p>
-            <span class="chip"><svg class="ic"><use href="#i-flame"/></svg>98% AFUE furnaces</span>
-          </article>
-          <article class="story-card">
-            <span class="story-card__num">03 / Breathe</span>
-            <h3>Cleaner air inside.</h3>
-            <p>HEPA filtration, UV purification and whole-home humidity control remove up to 99% of airborne allergens.</p>
-            <span class="chip"><svg class="ic"><use href="#i-leaf"/></svg>MERV 13+ filtration</span>
-          </article>
-          <article class="story-card">
-            <span class="story-card__num">04 / Save</span>
-            <h3>A smarter home.</h3>
-            <p>Smart thermostats, zoning and annual tune-ups that keep your system efficient and your bills predictable.</p>
-            <span class="chip"><svg class="ic"><use href="#i-bolt"/></svg>Avg. $480 saved / yr</span>
-          </article>
-        </div>
-        <ol class="story__rail" aria-hidden="true"><li class="is-on">01 Summer</li><li>02 Winter</li><li>03 Spring</li><li>04 Every day</li></ol>
+<!-- ============ CLIMATE: photo banner + stats strip (static) ============ -->
+<section class="climate" id="climate">
+  <div class="container">
+    <div class="climate__banner">
+      <img src="assets/img/home-evening-md.webp" srcset="assets/img/home-evening-sm.webp 760w, assets/img/home-evening-md.webp 1100w, assets/img/home-evening.webp 1600w" sizes="(max-width: 1280px) 100vw, 1200px" width="1600" height="1067" alt="Family home glowing warmly at dusk" loading="lazy" decoding="async">
+      <div class="climate__inner">
+        <p class="eyebrow eyebrow--light">One partner, every season</p>
+        <h2>Whatever the weather, <em>home stays 72°.</em></h2>
+        <p>Heatwaves, snowstorms or pollen season — one local team keeps every room comfortable, all year round.</p>
+        <a class="btn btn--lime" href="contact.html#book">Book a free home assessment <svg class="ic"><use href="#i-arrow"/></svg></a>
       </div>
-
-      <div class="story__frame">
-        <!-- data-x / data-y: where the house sits in the photo (the "Inside" tag points at it) -->
-        <figure class="story__season is-on" data-badge="Summer · 98°F outside" data-out="98°F" data-color="#ffb066" data-note="cool &amp; quiet" data-run="Central air conditioner" data-run-note="26 SEER2 · whisper-quiet" data-x="46%" data-y="30%">
-          <img src="assets/img/home-summer.webp" srcset="assets/img/home-summer-sm.webp 760w, assets/img/home-summer-md.webp 1100w, assets/img/home-summer.webp 1600w" sizes="(max-width: 1024px) 100vw, 60vw" width="1600" height="1067" alt="Family home on a hot, sunny summer day" loading="lazy" decoding="async">
-        </figure>
-        <figure class="story__season" data-badge="Winter · 12°F outside" data-out="12°F" data-color="#8fd8ff" data-note="warm in every room" data-run="High-efficiency furnace" data-run-note="98% AFUE · safety-checked" data-x="48%" data-y="30%">
-          <img src="assets/img/home-winter.webp" srcset="assets/img/home-winter-sm.webp 760w, assets/img/home-winter-md.webp 1100w, assets/img/home-winter.webp 1600w" sizes="(max-width: 1024px) 100vw, 60vw" width="1600" height="1067" alt="Family home covered in snow" loading="lazy" decoding="async">
-        </figure>
-        <figure class="story__season" data-badge="Spring · pollen count high" data-out="High pollen" data-color="#e8f37a" data-note="99% allergens filtered" data-run="HEPA air purification" data-run-note="MERV 13 + UV-C" data-x="40%" data-y="26%">
-          <img src="assets/img/home-spring.webp" srcset="assets/img/home-spring-sm.webp 760w, assets/img/home-spring-md.webp 1100w, assets/img/home-spring.webp 1600w" sizes="(max-width: 1024px) 100vw, 60vw" width="1600" height="1067" alt="Home behind blossoming spring trees" loading="lazy" decoding="async">
-        </figure>
-        <figure class="story__season" data-badge="Every evening · smart &amp; efficient" data-out="Peak hours" data-color="#c6f432" data-note="on autopilot" data-run="Smart thermostat" data-run-note="Learns your schedule" data-x="52%" data-y="26%">
-          <img src="assets/img/home-evening.webp" srcset="assets/img/home-evening-sm.webp 760w, assets/img/home-evening-md.webp 1100w, assets/img/home-evening.webp 1600w" sizes="(max-width: 1024px) 100vw, 60vw" width="1600" height="1067" alt="Home glowing warmly at dusk" loading="lazy" decoding="async">
-        </figure>
-
-        <span class="story__badge" data-story-badge>Summer · 98°F outside</span>
-        <span class="story__tag"><i></i>Inside 72°F <small data-story-note>· cool &amp; quiet</small></span>
-
-        <div class="story__running">
-          <div class="story__running-img">
-            <img class="is-on" src="assets/img/outdoor-ac-sm.webp" alt="" width="640" height="480" loading="lazy">
-            <img src="assets/img/tech-4-sm.webp" alt="" width="640" height="960" loading="lazy">
-            <img src="assets/img/purifier-sm.webp" alt="" width="640" height="799" loading="lazy">
-            <img src="assets/img/thermostat-sm.webp" alt="" width="640" height="427" loading="lazy">
-          </div>
-          <div><small>Running now</small><b data-story-run>Central air conditioner</b><span data-story-run-note>26 SEER2 · whisper-quiet</span></div>
-        </div>
+    </div>
+    <div class="climate__stats">
+      <div class="climate__stat">
+        <span class="climate__label"><svg class="ic"><use href="#i-snow"/></svg>Cooling</span>
+        <b>26</b><span>SEER2 high-efficiency AC</span>
+      </div>
+      <div class="climate__stat">
+        <span class="climate__label"><svg class="ic"><use href="#i-flame"/></svg>Heating</span>
+        <b>98%</b><span>AFUE furnace efficiency</span>
+      </div>
+      <div class="climate__stat">
+        <span class="climate__label"><svg class="ic"><use href="#i-leaf"/></svg>Clean air</span>
+        <b>99%</b><span>of airborne allergens removed</span>
+      </div>
+      <div class="climate__stat">
+        <span class="climate__label"><svg class="ic"><use href="#i-bolt"/></svg>Savings</span>
+        <b>$480</b><span>average saved per year</span>
       </div>
     </div>
   </div>
@@ -389,16 +347,12 @@
     </header>
   </div>
   <div class="reviews__rows">
-    <div class="reviews__row" data-marquee data-speed="0.6">
+    <div class="reviews__row" data-marquee data-speed="0.35">
       <div class="reviews__group">
         <figure class="review"><div class="stars"><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg></div><blockquote>"AC died during a heatwave at 9pm. They were here by 10, and it was blowing cold by 11. Unreal service."</blockquote><figcaption><span class="avatar">SM</span><b>Sarah M.</b><small>AC Repair</small></figcaption></figure>
         <figure class="review"><div class="stars"><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg></div><blockquote>"Our heat pump install was spotless. Our winter bill dropped by almost half compared to the old oil boiler."</blockquote><figcaption><span class="avatar">DK</span><b>David K.</b><small>Heat Pump</small></figcaption></figure>
         <figure class="review"><div class="stars"><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg></div><blockquote>"Upfront price, no upsell, and the tech showed me photos of everything. Finally an HVAC company I trust."</blockquote><figcaption><span class="avatar">PR</span><b>Priya R.</b><small>Furnace Tune-Up</small></figcaption></figure>
         <figure class="review"><div class="stars"><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg></div><blockquote>"My son's allergies are so much better since they installed the air purification system. Worth every penny."</blockquote><figcaption><span class="avatar">JT</span><b>Jenna T.</b><small>Indoor Air Quality</small></figcaption></figure>
-      </div>
-    </div>
-    <div class="reviews__row" data-marquee data-speed="-0.5">
-      <div class="reviews__group">
         <figure class="review"><div class="stars"><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg></div><blockquote>"They manage HVAC for our three restaurants. Kitchen ventilation has not failed us once in four years."</blockquote><figcaption><span class="avatar">ML</span><b>Marco L.</b><small>Commercial</small></figcaption></figure>
         <figure class="review"><div class="stars"><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg></div><blockquote>"The Comfort Club plan pays for itself. Two tune-ups a year and priority booking, love it."</blockquote><figcaption><span class="avatar">AB</span><b>Alicia B.</b><small>Maintenance Plan</small></figcaption></figure>
         <figure class="review"><div class="stars"><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg></div><blockquote>"Upstairs used to be 8 degrees hotter. Zoning plus duct sealing fixed it completely."</blockquote><figcaption><span class="avatar">TW</span><b>Tom W.</b><small>Ductwork</small></figcaption></figure>
@@ -406,6 +360,8 @@
       </div>
     </div>
   </div>
+  <p class="reviews__hint" aria-hidden="true">Swipe to read more <svg class="ic"><use href="#i-arrow"/></svg></p>
+
 </section>
 
 <!-- ============ FAQ ============ -->

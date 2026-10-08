@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Season Section C — Bento Grid</title>
+<link rel="icon" href="../assets/img/logo-mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/style.min.css">
+<style>
+  .pv-note { background: var(--bg); text-align: center; padding: 40px 16px; color: var(--muted); font-size: .85rem; }
+  .pv-note a { color: var(--green); font-weight: 700; text-decoration: underline; }
+
+  .bento-sec { background: var(--green-deep); color: #fff; padding-block: clamp(70px, 9vw, 120px); }
+  .bento { display: grid; grid-template-columns: 1.15fr 1.15fr 1fr 1fr; grid-template-rows: repeat(2, minmax(260px, auto)); gap: 16px; }
+  .tile { position: relative; border-radius: var(--r-lg); overflow: hidden; padding: 24px; display: flex; flex-direction: column; justify-content: flex-end; isolation: isolate; transition: transform .5s var(--ease); }
+  .tile:hover { transform: translateY(-4px); }
+  .tile > img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+  .tile:hover > img { transform: scale(1.05); }
+  .tile--photo::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, rgba(5, 18, 12, .88) 0%, rgba(5, 18, 12, .35) 50%, rgba(5, 18, 12, .1) 100%); }
+  .tile--dark { background: rgba(255, 255, 255, .05); border: 1px solid rgba(255, 255, 255, .1); }
+  .tile--lime { background: var(--lime); color: var(--green-deep); }
+
+  .tile--hero { grid-column: 1 / 3; grid-row: 1 / 3; padding: clamp(26px, 3.5vw, 44px); }
+  .tile--hero h2 { font-size: clamp(2.2rem, 4.2vw, 3.8rem); margin: 6px 0 22px; max-width: 13ch; }
+  .tile--hero h2 em { color: var(--lime); }
+  .hero-stat { display: flex; align-items: center; gap: 16px; margin-bottom: 26px; }
+  .hero-stat b { font-size: clamp(3rem, 5vw, 4.4rem); font-weight: 800; letter-spacing: -.05em; line-height: 1; color: var(--lime); }
+  .hero-stat span { font-size: .95rem; color: rgba(255, 255, 255, .8); line-height: 1.4; }
+  .tile--hero .btn { align-self: flex-start; }
+
+  .tile__tag { position: absolute; top: 18px; left: 18px; padding: 6px 12px; border-radius: 99px; font-size: .74rem; font-weight: 700; background: rgba(0, 0, 0, .45); color: var(--c, #fff); }
+  .tile--lime .tile__tag, .tile--dark .tile__tag { position: static; align-self: flex-start; margin-bottom: auto; background: rgba(10, 42, 26, .1); }
+  .tile--dark .tile__tag { background: rgba(255, 255, 255, .08); color: var(--c); }
+  .tile__icon { position: absolute; top: 20px; right: 20px; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: rgba(255, 255, 255, .12); font-size: 1.15rem; }
+  .tile--lime .tile__icon { background: var(--green); }
+  .tile .big { font-size: clamp(2.4rem, 3.6vw, 3.2rem); font-weight: 800; letter-spacing: -.05em; line-height: 1; margin-bottom: 6px; }
+  .tile h3 { font-size: 1.2rem; margin-bottom: 6px; }
+  .tile p { font-size: .88rem; opacity: .8; }
+  .tile__in { display: inline-flex; align-items: center; gap: 7px; align-self: flex-start; margin-bottom: 12px; padding: 6px 11px; border-radius: 99px; background: #fff; color: var(--green-deep); font-size: .78rem; font-weight: 800; }
+  .tile__in i { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; }
+
+  @media (max-width: 1100px) {
+    .bento { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .tile--hero { grid-column: 1 / -1; grid-row: auto; min-height: 460px; }
+    .tile { min-height: 250px; }
+  }
+  @media (max-width: 640px) {
+    .bento { gap: 12px; }
+    .tile--hero { min-height: 420px; }
+    .tile { min-height: 210px; padding: 18px; border-radius: 20px; }
+    .tile .big { font-size: 2.1rem; }
+    .tile h3 { font-size: 1rem; }
+    .tile p { display: none; }
+    .tile__icon { width: 36px; height: 36px; top: 14px; right: 14px; }
+    .tile__tag { top: 14px; left: 14px; font-size: .68rem; }
+    .tile__in { font-size: .7rem; }
+  }
+</style>
+</head>
+<body>
+<p class="pv-note">Preview · Option C: Bento grid · <a href="index.html">← all options</a></p>
+
+<section class="bento-sec">
+  <div class="container bento">
+    <article class="tile tile--hero tile--photo">
+      <img src="../assets/img/home-evening-md.webp" srcset="../assets/img/home-evening-sm.webp 760w, ../assets/img/home-evening-md.webp 1100w, ../assets/img/home-evening.webp 1600w" sizes="(max-width:1100px) 100vw, 50vw" alt="Home glowing warmly at dusk" loading="lazy">
+      <p class="eyebrow eyebrow--light">One partner, every season</p>
+      <h2>Whatever the weather, <em>home feels right.</em></h2>
+      <div class="hero-stat"><b>72°F</b><span>inside your home<br>365 days a year</span></div>
+      <a class="btn btn--lime" href="../contact.html#book">Book a free assessment →</a>
+    </article>
+
+    <article class="tile tile--photo" style="--c:#ffb066">
+      <img src="../assets/img/home-summer-md.webp" srcset="../assets/img/home-summer-sm.webp 760w, ../assets/img/home-summer-md.webp 1100w" sizes="(max-width:1100px) 50vw, 25vw" alt="Family home on a hot summer day" loading="lazy">
+      <span class="tile__tag">☀ 98°F outside</span>
+      <span class="tile__in"><i></i>72°F inside</span>
+      <h3>Summer, sorted.</h3>
+      <p>High-efficiency AC up to 26 SEER2.</p>
+    </article>
+
+    <article class="tile tile--lime">
+      <span class="tile__icon">⚡</span>
+      <span class="tile__tag">All year</span>
+      <span class="big">$480</span>
+      <h3>Saved per year</h3>
+      <p>Smart thermostats, zoning &amp; tune-ups.</p>
+    </article>
+
+    <article class="tile tile--dark" style="--c:#e8f37a">
+      <span class="tile__icon">🌿</span>
+      <span class="tile__tag">Spring</span>
+      <span class="big" style="color:#e8f37a">99%</span>
+      <h3>Allergens removed</h3>
+      <p>HEPA filtration + UV purification.</p>
+    </article>
+
+    <article class="tile tile--photo" style="--c:#8fd8ff">
+      <img src="../assets/img/home-winter-md.webp" srcset="../assets/img/home-winter-sm.webp 760w, ../assets/img/home-winter-md.webp 1100w" sizes="(max-width:1100px) 50vw, 25vw" alt="Family home covered in snow" loading="lazy">
+      <span class="tile__tag">❄ 12°F outside</span>
+      <span class="tile__in"><i></i>72°F inside</span>
+      <h3>Winter, handled.</h3>
+      <p>98% AFUE furnaces &amp; cold-climate heat pumps.</p>
+    </article>
+  </div>
+</section>
+
+<p class="pv-note">End of section · <a href="index.html">← all options</a></p>
+</body>
+</html>

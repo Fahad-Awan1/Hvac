@@ -54,8 +54,10 @@
   }
   const scrollToEl = (el) => {
     if (!el) return;
-    if (lenis) lenis.scrollTo(el, { offset: -100, duration: 1.2 });
-    else el.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
+    // respect each section's scroll-margin-top (e.g. service blocks sit below the sticky header + sub-nav)
+    const margin = parseFloat(getComputedStyle(el).scrollMarginTop) || 100;
+    if (lenis) lenis.scrollTo(el, { offset: -margin, duration: 1.2 });
+    else window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - margin, behavior: reduced ? 'auto' : 'smooth' });
   };
 
   /* ---------- Main loop ---------- */
@@ -220,7 +222,35 @@
     menu.setAttribute('aria-hidden', String(!open));
     open ? lenis?.stop() : lenis?.start();
   });
-  addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
+  addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeMenu(); closeDropdowns(); } });
+
+  /* ---------- Services sub-menus ---------- */
+  // phone menu: the Services row expands/collapses its list of services
+  $$('.menu__row').forEach((btn) => btn.addEventListener('click', () => {
+    const open = btn.getAttribute('aria-expanded') !== 'true';
+    btn.setAttribute('aria-expanded', String(open));
+    btn.closest('.menu__group').classList.toggle('is-open', open);
+  }));
+  // desktop dropdown: opens on hover/focus (CSS); on touch screens the first tap opens it instead of navigating
+  const navItems = $$('.nav__item');
+  function closeDropdowns() {
+    navItems.forEach((it) => { it.classList.remove('is-open'); $('.nav__parent', it)?.setAttribute('aria-expanded', 'false'); });
+  }
+  navItems.forEach((item) => {
+    const parent = $('.nav__parent', item);
+    item.addEventListener('mouseenter', () => parent.setAttribute('aria-expanded', 'true'));
+    item.addEventListener('mouseleave', () => { if (!item.classList.contains('is-open')) parent.setAttribute('aria-expanded', 'false'); });
+    parent.addEventListener('click', (e) => {
+      if (finePointer || item.classList.contains('is-open')) return; // mouse users (or second tap) go to the page
+      e.preventDefault();
+      closeDropdowns();
+      item.classList.add('is-open');
+      parent.setAttribute('aria-expanded', 'true');
+    });
+    // picking a service closes the panel
+    $$('.nav__sub a', item).forEach((a) => a.addEventListener('click', () => { closeDropdowns(); a.blur(); }));
+  });
+  document.addEventListener('click', (e) => { if (!e.target.closest('.nav__item')) closeDropdowns(); });
 
   /* ---------- Split headings ---------- */
   function split(el) {
@@ -339,10 +369,13 @@
   }
 
   /* ---------- Marquees: pure CSS animation (runs on the compositor) ---------- */
-  // read every marquee width first (one layout), then mutate — avoids a forced layout per marquee
-  const marquees = $$('[data-marquee]').filter((t) => t.firstElementChild).map((track) => ({ track, gw: track.firstElementChild.scrollWidth || 1 }));
-  marquees.forEach(({ track, gw }) => {
+  // Set up lazily, the first time a marquee nears the viewport: sections skipped by content-visibility
+  // have no layout yet, and measuring them early returns 0px (which made the strip race).
+  const phone = matchMedia('(max-width: 640px)').matches;
+  const setupMarquee = (track) => {
     const group = track.firstElementChild;
+    const gw = group.scrollWidth;
+    if (gw < 50) return false; // not laid out yet — try again on the next intersection
     // repeat the group's items so one group is wider than the screen, then clone it once
     const kids = [...group.children];
     const reps = Math.min(4, Math.ceil((vw * 1.15) / gw)); // just wider than the screen: keeps the GPU layer small
@@ -354,8 +387,16 @@
     track.style.setProperty('--marquee-dur', `${((gw * reps) / (Math.abs(speed) * 60)).toFixed(1)}s`);
     track.classList.add('is-marquee');
     if (speed < 0) track.classList.add('is-reverse');
-    // pause when off-screen so the compositor does no work for it
-    new IntersectionObserver(([e]) => track.classList.toggle('is-paused', !e.isIntersecting)).observe(track);
+    return true;
+  };
+  $$('[data-marquee]').forEach((track) => {
+    if (!track.firstElementChild || reduced) return;
+    if (phone && track.closest('.reviews')) return; // phones: reviews are a swipeable row instead (CSS)
+    new IntersectionObserver(([e]) => {
+      if (e.isIntersecting && !track.classList.contains('is-marquee') && !setupMarquee(track)) return;
+      // pause when off-screen so the compositor does no work for it
+      track.classList.toggle('is-paused', !e.isIntersecting);
+    }, { rootMargin: '150px 0px' }).observe(track);
   });
 
   /* ---------- Custom cursor ---------- */
@@ -529,49 +570,6 @@
       const start = () => setTimeout(run, 1200);
       root.classList.contains('ready') ? start() : addEventListener('hvac:ready', start, { once: true });
     }
-  }
-
-  /* ---------- Story: one home, every season (sticky scroll) ---------- */
-  const story = $('[data-story]');
-  if (story) {
-    const seasons = $$('.story__season', story);
-    const cards = $$('.story-card', story);
-    const rail = $$('.story__rail li', story);
-    const runImgs = $$('.story__running-img img', story);
-    const tag = $('.story__tag', story);
-    const q = (k) => $(`[data-story-${k}]`, story);
-    const toggle = (list, i, cls = 'is-on') => list.forEach((el, k) => el.classList.toggle(cls, k === i));
-    let active = 0;
-    const show = (i) => {
-      active = i;
-      const d = seasons[i].dataset;
-      toggle(seasons, i);
-      toggle(runImgs, i);
-      toggle(cards, i, 'is-active');
-      rail.forEach((el, k) => { el.classList.toggle('is-on', k === i); el.classList.toggle('is-done', k < i); });
-      story.style.setProperty('--out', d.color);
-      q('badge').textContent = d.badge;
-      q('out').textContent = d.out;
-      q('note').textContent = '· ' + d.note;
-      q('run').textContent = d.run;
-      q('run-note').textContent = d.runNote;
-      // fade the "Inside 72°F" tag out, move it while invisible, fade back in (no layout animation)
-      if (tag.style.getPropertyValue('--x')) {
-        tag.classList.add('is-moving');
-        clearTimeout(tagT);
-        tagT = setTimeout(() => { tag.style.setProperty('--x', d.x); tag.style.setProperty('--y', d.y); tag.classList.remove('is-moving'); }, 300);
-      } else {
-        tag.style.setProperty('--x', d.x);
-        tag.style.setProperty('--y', d.y);
-      }
-    };
-    let tagT;
-    show(0);
-    onScrollWithin(story, (top, h) => {
-      const p = clamp(-top / (h - vh));
-      const idx = Math.min(seasons.length - 1, Math.floor(p * seasons.length * 0.999));
-      if (idx !== active) show(idx);
-    }, 0);
   }
 
   /* ---------- Horizontal pinned services (desktop) / native swipe (mobile) ---------- */

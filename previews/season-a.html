@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Season Section A — Season Cards</title>
+<link rel="icon" href="../assets/img/logo-mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/style.min.css">
+<style>
+  .pv-note { background: var(--bg); text-align: center; padding: 40px 16px; color: var(--muted); font-size: .85rem; }
+  .pv-note a { color: var(--green); font-weight: 700; text-decoration: underline; }
+
+  .seasons { background: var(--green-deep); color: #fff; padding-block: clamp(70px, 9vw, 120px); }
+  .seasons__head { display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; flex-wrap: wrap; margin-bottom: clamp(36px, 4vw, 56px); }
+  .seasons__head h2 em { color: var(--lime); }
+  .seasons__head p { color: rgba(255, 255, 255, .7); max-width: 40ch; }
+  .seasons__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+
+  .scard2 { display: flex; flex-direction: column; border-radius: var(--r-lg); overflow: hidden; background: rgba(255, 255, 255, .04); border: 1px solid rgba(255, 255, 255, .09); transition: transform .5s var(--ease), border-color .4s, background-color .4s; }
+  .scard2:hover { transform: translateY(-6px); border-color: rgba(198, 244, 50, .4); background: rgba(255, 255, 255, .07); }
+  .scard2__photo { position: relative; aspect-ratio: 4 / 3.3; overflow: hidden; }
+  .scard2__photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+  .scard2:hover .scard2__photo img { transform: scale(1.06); }
+  .scard2__photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(5, 18, 12, .55), transparent 55%); }
+  .scard2__out { position: absolute; z-index: 1; top: 12px; left: 12px; padding: 6px 12px; border-radius: 99px; background: rgba(0, 0, 0, .45); font-size: .76rem; font-weight: 700; color: var(--c); }
+  .scard2__in { position: absolute; z-index: 1; left: 12px; bottom: 12px; display: inline-flex; align-items: center; gap: 7px; padding: 7px 12px; border-radius: 99px; background: #fff; color: var(--green-deep); font-size: .8rem; font-weight: 800; }
+  .scard2__in i { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; }
+  .scard2__body { padding: 22px 22px 18px; display: flex; flex-direction: column; flex: 1; }
+  .scard2__num { font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--c); }
+  .scard2__body h3 { font-size: 1.3rem; margin: 8px 0 8px; }
+  .scard2__body p { font-size: .9rem; color: rgba(255, 255, 255, .7); margin-bottom: 18px; flex: 1; }
+  .scard2__eq { display: flex; align-items: center; gap: 12px; padding-top: 14px; border-top: 1px solid rgba(255, 255, 255, .1); }
+  .scard2__eq img { width: 44px; height: 44px; border-radius: 10px; object-fit: cover; }
+  .scard2__eq b { display: block; font-size: .85rem; }
+  .scard2__eq small { font-size: .74rem; color: rgba(255, 255, 255, .6); }
+
+  .seasons__hint { display: none; }
+  @media (max-width: 1100px) { .seasons__grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 640px) {
+    /* phones: one swipeable row */
+    .seasons__grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 14px; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); scroll-padding-inline: var(--gutter); scrollbar-width: none; }
+    .seasons__grid::-webkit-scrollbar { display: none; }
+    .scard2 { flex: 0 0 82%; scroll-snap-align: start; }
+    .seasons__hint { display: block; text-align: center; margin-top: 16px; font-size: .8rem; color: rgba(255, 255, 255, .55); }
+  }
+</style>
+</head>
+<body>
+<p class="pv-note">Preview · Option A: Season cards · <a href="index.html">← all options</a></p>
+
+<section class="seasons">
+  <div class="container">
+    <header class="seasons__head">
+      <div>
+        <p class="eyebrow eyebrow--light">One partner, every season</p>
+        <h2>Whatever the weather,<br><em>home stays 72°.</em></h2>
+      </div>
+      <p>Heatwave, snowstorm or pollen season — the right system keeps every room comfortable, all year.</p>
+    </header>
+
+    <div class="seasons__grid">
+      <article class="scard2" style="--c:#ffb066">
+        <div class="scard2__photo">
+          <img src="../assets/img/home-summer-md.webp" srcset="../assets/img/home-summer-sm.webp 760w, ../assets/img/home-summer-md.webp 1100w" sizes="(max-width:640px) 82vw, (max-width:1100px) 50vw, 25vw" alt="Family home on a hot summer day" loading="lazy">
+          <span class="scard2__out">☀ 98°F outside</span>
+          <span class="scard2__in"><i></i>Inside 72°F</span>
+        </div>
+        <div class="scard2__body">
+          <span class="scard2__num">01 · Summer</span>
+          <h3>Cool &amp; quiet.</h3>
+          <p>High-efficiency AC sized to your home — no hot rooms, no short cycling.</p>
+          <div class="scard2__eq"><img src="../assets/img/ac-units-sm.webp" alt=""><div><b>Central AC</b><small>Up to 26 SEER2</small></div></div>
+        </div>
+      </article>
+      <article class="scard2" style="--c:#8fd8ff">
+        <div class="scard2__photo">
+          <img src="../assets/img/home-winter-md.webp" srcset="../assets/img/home-winter-sm.webp 760w, ../assets/img/home-winter-md.webp 1100w" sizes="(max-width:640px) 82vw, (max-width:1100px) 50vw, 25vw" alt="Family home covered in snow" loading="lazy">
+          <span class="scard2__out">❄ 12°F outside</span>
+          <span class="scard2__in"><i></i>Inside 72°F</span>
+        </div>
+        <div class="scard2__body">
+          <span class="scard2__num">02 · Winter</span>
+          <h3>Warm in every room.</h3>
+          <p>Furnaces and cold-climate heat pumps, safety-checked on every visit.</p>
+          <div class="scard2__eq"><img src="../assets/img/tech-4-sm.webp" alt=""><div><b>High-efficiency furnace</b><small>98% AFUE</small></div></div>
+        </div>
+      </article>
+      <article class="scard2" style="--c:#e8f37a">
+        <div class="scard2__photo">
+          <img src="../assets/img/home-spring-md.webp" srcset="../assets/img/home-spring-sm.webp 760w, ../assets/img/home-spring-md.webp 1100w" sizes="(max-width:640px) 82vw, (max-width:1100px) 50vw, 25vw" alt="Home behind blossoming spring trees" loading="lazy">
+          <span class="scard2__out">🌸 Pollen count high</span>
+          <span class="scard2__in"><i></i>Inside: clean air</span>
+        </div>
+        <div class="scard2__body">
+          <span class="scard2__num">03 · Spring</span>
+          <h3>Breathe easier.</h3>
+          <p>HEPA filtration and UV purification remove up to 99% of allergens.</p>
+          <div class="scard2__eq"><img src="../assets/img/purifier-sm.webp" alt=""><div><b>Air purification</b><small>MERV 13 + UV-C</small></div></div>
+        </div>
+      </article>
+      <article class="scard2" style="--c:#c6f432">
+        <div class="scard2__photo">
+          <img src="../assets/img/home-evening-md.webp" srcset="../assets/img/home-evening-sm.webp 760w, ../assets/img/home-evening-md.webp 1100w" sizes="(max-width:640px) 82vw, (max-width:1100px) 50vw, 25vw" alt="Home glowing warmly at dusk" loading="lazy">
+          <span class="scard2__out">🌙 Every evening</span>
+          <span class="scard2__in"><i></i>Inside 72°F, on autopilot</span>
+        </div>
+        <div class="scard2__body">
+          <span class="scard2__num">04 · All year</span>
+          <h3>Smarter &amp; cheaper.</h3>
+          <p>Smart thermostats and tune-ups that keep bills low and predictable.</p>
+          <div class="scard2__eq"><img src="../assets/img/thermostat-sm.webp" alt=""><div><b>Smart thermostat</b><small>Avg. $480 saved / yr</small></div></div>
+        </div>
+      </article>
+    </div>
+    <p class="seasons__hint">Swipe to see every season →</p>
+  </div>
+</section>
+
+<p class="pv-note">End of section · <a href="index.html">← all options</a></p>
+</body>
+</html>

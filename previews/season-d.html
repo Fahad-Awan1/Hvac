@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section D — Split Feature (static)</title>
+<link rel="icon" href="../assets/img/logo-mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/style.min.css">
+<style>
+  .pv-note { background: var(--bg); text-align: center; padding: 40px 16px; color: var(--muted); font-size: .85rem; }
+  .pv-note a { color: var(--green); font-weight: 700; text-decoration: underline; }
+
+  .split { background: var(--green-deep); color: #fff; padding-block: clamp(70px, 9vw, 120px); }
+  .split__grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(32px, 5vw, 80px); align-items: center; }
+
+  .split__media { position: relative; border-radius: var(--r-xl); overflow: hidden; aspect-ratio: 4 / 4.4; }
+  .split__media img { width: 100%; height: 100%; object-fit: cover; }
+  .split__media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(5, 18, 12, .45), transparent 40%); }
+  .temp-card { position: absolute; z-index: 1; left: 24px; bottom: 24px; display: flex; align-items: center; gap: 16px; padding: 16px 22px 16px 16px; border-radius: 20px; background: #fff; color: var(--ink); box-shadow: 0 20px 40px -12px rgba(0, 0, 0, .45); }
+  .temp-card__dial { width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; border: 5px solid var(--lime); font-weight: 800; font-size: 1.25rem; letter-spacing: -.03em; color: var(--green-deep); }
+  .temp-card small { display: block; font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--green-3); }
+  .temp-card b { font-size: 1.05rem; }
+  .rating { position: absolute; z-index: 1; top: 24px; right: 24px; padding: 10px 14px; border-radius: 14px; background: rgba(10, 42, 26, .82); font-size: .82rem; line-height: 1.3; }
+  .rating b { color: var(--lime); font-size: 1.1rem; }
+
+  .split h2 { margin-bottom: 16px; }
+  .split h2 em { color: var(--lime); }
+  .split__lead { color: rgba(255, 255, 255, .72); max-width: 46ch; margin-bottom: 30px; }
+  .benefits { border-top: 1px solid rgba(255, 255, 255, .12); margin-bottom: 34px; }
+  .benefit { display: grid; grid-template-columns: 48px 1fr auto; gap: 16px; align-items: center; padding: 18px 0; border-bottom: 1px solid rgba(255, 255, 255, .12); }
+  .benefit__icon { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; background: rgba(198, 244, 50, .12); color: var(--lime); }
+  .benefit__icon svg { width: 22px; height: 22px; }
+  .benefit h3 { font-size: 1.05rem; margin-bottom: 2px; }
+  .benefit p { font-size: .88rem; color: rgba(255, 255, 255, .62); }
+  .benefit__stat { font-weight: 800; color: var(--lime); font-size: .95rem; white-space: nowrap; }
+  .split__ctas { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+  .split__ctas .tel { font-weight: 700; border-bottom: 1.5px solid rgba(255, 255, 255, .5); padding-bottom: 2px; }
+
+  @media (max-width: 1024px) { .split__grid { grid-template-columns: 1fr; } .split__media { aspect-ratio: 4 / 3; } }
+  @media (max-width: 640px) {
+    .split__media { aspect-ratio: 4 / 3.6; border-radius: 22px; }
+    .temp-card { left: 14px; bottom: 14px; padding: 12px 16px 12px 12px; gap: 12px; }
+    .temp-card__dial { width: 52px; height: 52px; font-size: 1.05rem; border-width: 4px; }
+    .rating { top: 14px; right: 14px; }
+    .benefit { grid-template-columns: 42px 1fr; padding: 15px 0; }
+    .benefit__icon { width: 42px; height: 42px; }
+    .benefit__stat { grid-column: 2; font-size: .82rem; }
+    .split__ctas .btn { width: 100%; }
+  }
+</style>
+</head>
+<body>
+<p class="pv-note">Preview · Option D: Split feature (fully static) · <a href="index.html">← all options</a></p>
+
+<section class="split">
+  <div class="container split__grid">
+    <figure class="split__media" style="margin:0">
+      <img src="../assets/img/bg-ok-md.webp" srcset="../assets/img/bg-ok-sm.webp 760w, ../assets/img/bg-ok-md.webp 1100w, ../assets/img/bg-ok.webp 1600w" sizes="(max-width:1024px) 100vw, 52vw" alt="Bright, comfortable living room with a wall-mounted AC unit" loading="lazy">
+      <div class="rating"><b>4.9★</b><br>1,280 reviews</div>
+      <div class="temp-card">
+        <span class="temp-card__dial">72°</span>
+        <span><small>Inside your home</small><b>Comfortable all year</b></span>
+      </div>
+    </figure>
+
+    <div>
+      <p class="eyebrow eyebrow--light">One partner, every season</p>
+      <h2>Whatever the weather, <em>home stays 72°.</em></h2>
+      <p class="split__lead">From summer heatwaves to winter freezes, one local team installs, repairs and maintains everything that keeps your home comfortable.</p>
+      <div class="benefits">
+        <div class="benefit">
+          <span class="benefit__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 2v20M3.3 7l17.4 10M3.3 17 20.7 7"/></svg></span>
+          <div><h3>Cooling</h3><p>Central AC &amp; ductless mini-splits</p></div>
+          <span class="benefit__stat">Up to 26 SEER2</span>
+        </div>
+        <div class="benefit">
+          <span class="benefit__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 22c4 0 7-2.8 7-7 0-4.5-3.5-7-4.5-11-2 1.5-3.5 4-3.5 6.5C9.5 9 9 7.5 9 6c-2.5 2-4 5.3-4 9 0 4.2 3 7 7 7Z"/></svg></span>
+          <div><h3>Heating</h3><p>Furnaces, boilers &amp; heat pumps</p></div>
+          <span class="benefit__stat">98% AFUE</span>
+        </div>
+        <div class="benefit">
+          <span class="benefit__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19C4 11 9 4 20 4c0 11-6 16-15 15Zm0 0 8-8"/></svg></span>
+          <div><h3>Clean air</h3><p>HEPA filtration &amp; UV purification</p></div>
+          <span class="benefit__stat">99% allergens out</span>
+        </div>
+        <div class="benefit">
+          <span class="benefit__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7Z"/></svg></span>
+          <div><h3>Smart savings</h3><p>Smart thermostats &amp; yearly tune-ups</p></div>
+          <span class="benefit__stat">$480 saved / yr</span>
+        </div>
+      </div>
+      <div class="split__ctas">
+        <a class="btn btn--lime" href="../contact.html#book">Book a free home assessment →</a>
+        <a class="tel" href="tel:+15550142290">or call (555) 014-2290</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<p class="pv-note">End of section · <a href="index.html">← all options</a></p>
+</body>
+</html>
