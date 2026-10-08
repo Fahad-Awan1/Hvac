@@ -1,0 +1,132 @@
+<!--meta {"title":"Contact & Book a Service — 24/7 Emergency HVAC | HVAC","desc":"Book an HVAC service online in 60 seconds, call our 24/7 emergency line, or check if we serve your ZIP code.","nav":"contact"} -->
+
+<section class="page-hero">
+  <div class="container page-hero__grid">
+    <div>
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span>Contact</nav>
+      <p class="eyebrow" data-hero-in style="--d:0s">Get in Touch</p>
+      <h1 data-hero-in style="--d:0.08s">Let's get your home <em>feeling right</em> again.</h1>
+      <p class="lead" data-hero-in style="--d:0.16s">Book online in about 60 seconds, chat with Breeze, or call a real person 24/7. Most repairs are completed the same day.</p>
+      <div class="hero__ctas" data-hero-in style="--d:0.24s">
+        <a class="btn btn--dark magnetic" href="#book">Book Online <svg class="ic"><use href="#i-arrow"/></svg></a>
+        <a class="link-u" href="tel:+15550142290">Call (555) 014-2290</a>
+      </div>
+    </div>
+    <div class="page-hero__visual" data-hero-in="scale" style="--d:0.32s" data-cursor="Drag">
+      <canvas class="scene" data-scene="morph" data-shapes="fan,snowflake,flame" aria-label="3D particles forming a fan, snowflake and flame"></canvas>
+      <div class="hud"><span class="pulse-dot"></span> 6 technicians available today</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:clamp(20px,3vw,40px)">
+  <div class="container contact-grid">
+    <div class="booking" id="book">
+      <ol class="booking__steps" aria-label="Booking progress">
+        <li class="is-current">1. Service</li><li>2. Time</li><li>3. Details</li><li>4. Confirm</li>
+      </ol>
+      <form data-booking novalidate>
+        <fieldset class="bstep is-current" style="border:0;padding:0;margin:0">
+          <legend class="sr-only">Choose a service</legend>
+          <h2>What do you need help with?</h2>
+          <div class="opt-grid" data-req="radio">
+            <label class="opt"><input type="radio" name="service" value="AC repair" data-v="repair"><span><svg class="ic"><use href="#i-snow"/></svg>AC Repair</span></label>
+            <label class="opt"><input type="radio" name="service" value="Heating repair" data-v="heating"><span><svg class="ic"><use href="#i-flame"/></svg>Heating Repair</span></label>
+            <label class="opt"><input type="radio" name="service" value="New system quote" data-v="install"><span><svg class="ic"><use href="#i-home"/></svg>New System Quote</span></label>
+            <label class="opt"><input type="radio" name="service" value="Tune-up / maintenance" data-v="tuneup"><span><svg class="ic"><use href="#i-tool"/></svg>Tune-Up</span></label>
+            <label class="opt"><input type="radio" name="service" value="Indoor air quality" data-v="air"><span><svg class="ic"><use href="#i-leaf"/></svg>Air Quality</span></label>
+            <label class="opt"><input type="radio" name="service" value="Ductwork" data-v="ducts"><span><svg class="ic"><use href="#i-wind"/></svg>Ductwork</span></label>
+            <label class="opt"><input type="radio" name="service" value="Smart thermostat" data-v="smart"><span><svg class="ic"><use href="#i-thermo"/></svg>Thermostat</span></label>
+            <label class="opt"><input type="radio" name="service" value="Commercial HVAC" data-v="commercial"><span><svg class="ic"><use href="#i-building"/></svg>Commercial</span></label>
+            <label class="opt opt--urgent"><input type="radio" name="service" value="EMERGENCY" data-v="emergency"><span><svg class="ic"><use href="#i-bolt"/></svg>Emergency</span></label>
+          </div>
+          <p class="bstep__err" role="alert"></p>
+          <div class="bnav"><span></span><button type="button" class="btn btn--dark" data-next>Continue <svg class="ic"><use href="#i-arrow"/></svg></button></div>
+        </fieldset>
+
+        <fieldset class="bstep" style="border:0;padding:0;margin:0">
+          <legend class="sr-only">Pick a date and time</legend>
+          <h2>When should we come?</h2>
+          <div class="days" data-req="radio"></div>
+          <div class="slots" data-req="radio">
+            <label class="opt"><input type="radio" name="time" value="8–10 AM"><span>8–10 AM</span></label>
+            <label class="opt"><input type="radio" name="time" value="10–12 PM"><span>10–12 PM</span></label>
+            <label class="opt"><input type="radio" name="time" value="1–3 PM"><span>1–3 PM</span></label>
+            <label class="opt"><input type="radio" name="time" value="3–5 PM"><span>3–5 PM</span></label>
+          </div>
+          <p class="bstep__err" role="alert"></p>
+          <div class="bnav"><button type="button" class="btn btn--ghost" data-prev>Back</button><button type="button" class="btn btn--dark" data-next>Continue <svg class="ic"><use href="#i-arrow"/></svg></button></div>
+        </fieldset>
+
+        <fieldset class="bstep" style="border:0;padding:0;margin:0">
+          <legend class="sr-only">Your details</legend>
+          <h2>Your details</h2>
+          <div class="fields">
+            <div class="field"><label for="b-name">Full name</label><input id="b-name" name="name" autocomplete="name" required><span class="err"></span></div>
+            <div class="field"><label for="b-phone">Phone</label><input id="b-phone" name="phone" type="tel" autocomplete="tel" required><span class="err"></span></div>
+            <div class="field"><label for="b-email">Email</label><input id="b-email" name="email" type="email" autocomplete="email" required><span class="err"></span></div>
+            <div class="field"><label for="b-zip">ZIP code</label><input id="b-zip" name="zip" inputmode="numeric" autocomplete="postal-code" required><span class="err"></span></div>
+            <div class="field field--full"><label for="b-address">Service address</label><input id="b-address" name="address" autocomplete="street-address" required><span class="err"></span></div>
+            <div class="field field--full"><label for="b-notes">Describe the issue (optional)</label><textarea id="b-notes" name="notes" placeholder="e.g. Upstairs AC blowing warm air since yesterday"></textarea><span class="err"></span></div>
+          </div>
+          <div class="bnav"><button type="button" class="btn btn--ghost" data-prev>Back</button><button type="button" class="btn btn--dark" data-next>Review <svg class="ic"><use href="#i-arrow"/></svg></button></div>
+        </fieldset>
+
+        <fieldset class="bstep" style="border:0;padding:0;margin:0">
+          <legend class="sr-only">Confirm booking</legend>
+          <h2>Confirm your booking</h2>
+          <dl class="summary"></dl>
+          <p class="calc__note" style="color:var(--muted)">No payment needed now. You'll approve a flat-rate price before any work begins.</p>
+          <div class="bnav"><button type="button" class="btn btn--ghost" data-prev>Back</button><button type="submit" class="btn btn--lime">Confirm Booking <svg class="ic"><use href="#i-check"/></svg></button></div>
+        </fieldset>
+      </form>
+    </div>
+
+    <aside class="info-stack">
+      <a href="tel:+15550142290" class="info info--emer" data-reveal><svg class="ic"><use href="#i-phone"/></svg><span><small>24/7 Emergency line</small><b>(555) 014-2290</b></span></a>
+      <a href="mailto:hello@hvac-comfort.com" class="info" data-reveal><svg class="ic"><use href="#i-mail"/></svg><span><small>Email us</small><b>hello@hvac-comfort.com</b></span></a>
+      <div class="info" data-reveal><svg class="ic"><use href="#i-pin"/></svg><span><small>Visit our office</small><b>1200 Comfort Ave, Suite 4<br>Springfield, IL 62701</b></span></div>
+      <div class="info" data-reveal><svg class="ic"><use href="#i-clock"/></svg><span><small>Office hours</small><b>Mon–Sat · 7am–8pm</b></span></div>
+      <div class="area" data-reveal>
+        <h3>Do we serve your area?</h3>
+        <p>Enter your ZIP code for an instant answer.</p>
+        <form data-area novalidate>
+          <label for="zip" class="sr-only">ZIP code</label>
+          <input id="zip" name="zip" inputmode="numeric" maxlength="5" placeholder="e.g. 62704">
+          <button class="btn btn--dark btn--sm" type="submit">Check</button>
+        </form>
+        <p class="area__res" role="status"></p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div class="map" data-reveal>
+      <div class="map__load">
+        <div>
+          <svg class="ic" style="width:48px;height:48px;color:var(--lime);margin:0 auto 14px"><use href="#i-pin"/></svg>
+          <h3>1200 Comfort Ave, Springfield</h3>
+          <p>The map loads on demand to keep this page fast.</p>
+          <button type="button" class="btn btn--lime btn--sm" data-map>Show Map</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section faq-sec" style="background:var(--surface)">
+  <div class="container faq-sec__grid">
+    <div>
+      <p class="eyebrow" data-reveal>Before You Call</p>
+      <h2 data-split>Quick <em>answers</em></h2>
+      <p class="lead" data-reveal>Common questions about booking and arrival.</p>
+    </div>
+    <div class="accordion">
+      <details class="acc" open><summary>How fast can a technician arrive?<i></i></summary><div class="acc__body"><p>Emergencies: usually within 60 minutes in our core area. Standard bookings: same or next day, with a 2-hour arrival window and a text when your tech is on the way.</p></div></details>
+      <details class="acc"><summary>Will I know the price upfront?<i></i></summary><div class="acc__body"><p>Yes. After diagnosis you'll get a flat-rate price to approve before any work starts. No hourly surprises.</p></div></details>
+      <details class="acc"><summary>Do I need to be home?<i></i></summary><div class="acc__body"><p>For indoor equipment, yes, or a trusted adult. For outdoor-only work we can often proceed with your permission and send photos.</p></div></details>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hero A — Cinematic Local</title>
+<link rel="icon" href="../assets/img/logo-mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&display=swap">
+<link rel="stylesheet" href="shared.css">
+<style>
+  .hero { position: relative; min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; color: #fff; overflow: hidden; background: var(--green-deep); }
+  .hero__bg { position: absolute; inset: 0; }
+  .hero__bg img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; transform: scale(1.12); animation: settle 2.6s var(--ease) forwards; }
+  @keyframes settle { to { transform: scale(1); } }
+  .hero__bg::after { content: ""; position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(7, 26, 16, .96) 0%, rgba(7, 26, 16, .72) 38%, rgba(7, 26, 16, .25) 70%, rgba(7, 26, 16, .45) 100%); }
+
+  .hero__body { position: relative; display: grid; grid-template-columns: 1.35fr .65fr; align-items: end; gap: 48px; padding: 140px var(--gutter) 44px; }
+  .kicker { display: flex; gap: 14px; align-items: center; font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; color: rgba(255, 255, 255, .7); margin-bottom: 26px; }
+  .kicker span + span::before { content: ""; display: inline-block; width: 18px; height: 1px; background: currentColor; vertical-align: middle; margin-right: 14px; opacity: .5; }
+  h1 { font-size: clamp(3.1rem, 8.6vw, 8.4rem); font-weight: 700; letter-spacing: -.055em; line-height: .9; }
+  h1 .l { display: block; overflow: hidden; padding-bottom: .04em; }
+  h1 .l > span { display: block; transform: translateY(105%); animation: rise 1.1s var(--ease) forwards; }
+  h1 .l:nth-child(2) > span { animation-delay: .12s; }
+  @keyframes rise { to { transform: none; } }
+  h1 b { color: var(--lime); font-weight: 700; }
+
+  .side p { color: rgba(255, 255, 255, .78); font-size: 1.05rem; line-height: 1.6; margin-bottom: 26px; max-width: 34ch; opacity: 0; animation: fade 1s .5s forwards; }
+  @keyframes fade { to { opacity: 1; } }
+  .actions { display: grid; gap: 12px; opacity: 0; animation: fade 1s .65s forwards; }
+  .btn { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-radius: 14px; font-weight: 700; transition: transform .4s var(--ease), background-color .3s; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn--lime { background: var(--lime); color: var(--green-deep); }
+  .btn--line { border: 1px solid rgba(255, 255, 255, .28); }
+  .btn--line:hover { background: rgba(255, 255, 255, .08); }
+  .btn small { display: block; font-weight: 500; font-size: .76rem; opacity: .7; margin-top: 2px; }
+  .btn .arr { font-size: 1.3rem; }
+
+  .strip { position: relative; display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 18px var(--gutter); border-top: 1px solid rgba(255, 255, 255, .14); font-size: .86rem; }
+  .dispatch { display: flex; align-items: center; gap: 12px; min-width: 0; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 0 rgba(34, 197, 94, .6); animation: pulse 1.8s infinite; flex: none; }
+  @keyframes pulse { 70% { box-shadow: 0 0 0 9px rgba(34, 197, 94, 0); } 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); } }
+  .dispatch__label { color: rgba(255, 255, 255, .55); white-space: nowrap; }
+  .ticker { position: relative; height: 1.4em; overflow: hidden; flex: 1; min-width: 0; }
+  .ticker span { position: absolute; left: 0; top: 0; white-space: nowrap; transition: transform .6s var(--ease), opacity .6s; }
+  .ticker span.out { transform: translateY(-100%); opacity: 0; }
+  .ticker span.in { transform: translateY(100%); opacity: 0; }
+  .facts { display: flex; gap: 26px; color: rgba(255, 255, 255, .7); white-space: nowrap; }
+  .facts b { color: #fff; }
+
+  @media (max-width: 900px) {
+    .hero__body { grid-template-columns: 1fr; gap: 30px; padding-bottom: 30px; }
+    .facts { display: none; }
+  }
+  @media (max-width: 480px) {
+    .kicker { font-size: .68rem; gap: 10px; margin-bottom: 18px; }
+    .kicker span:last-child { display: none; }
+    h1 { font-size: 3.05rem; }
+    .side p { font-size: .97rem; margin-bottom: 20px; }
+    .btn { padding: 17px 20px; }
+    .dispatch__label { display: none; }
+  }
+</style>
+</head>
+<body>
+<header class="ph-header ph-light">
+  <a href="../index.html" class="ph-logo"><img src="../assets/img/logo-mark.svg" alt="" width="38" height="38">HVAC</a>
+  <nav class="ph-nav"><a href="../services.html">Services</a><a href="../projects.html">Projects</a><a href="../plans.html">Plans &amp; Pricing</a><a href="../about.html">About</a><a href="../contact.html">Contact</a></nav>
+  <div class="ph-right"><a class="ph-tel" href="tel:+15550142290">(555) 014-2290</a><a class="ph-cta" href="../contact.html#book">Book a visit</a></div>
+</header>
+
+<section class="hero">
+  <div class="hero__bg">
+    <img src="../assets/img/roof-techs.webp" srcset="../assets/img/roof-techs-sm.webp 640w, ../assets/img/roof-techs.webp 1200w" sizes="100vw" alt="Our technicians servicing rooftop units in downtown Springfield" fetchpriority="high">
+  </div>
+
+  <div class="hero__body">
+    <div>
+      <p class="kicker"><span>Heating &amp; cooling</span><span>Springfield, IL</span><span>Since 2010</span></p>
+      <h1><span class="l"><span>We keep Springfield</span></span><span class="l"><span>at <b>72°</b>.</span></span></h1>
+    </div>
+    <div class="side">
+      <p>Repairs, replacements and tune-ups by the same 45 local technicians who've looked after 9,800 homes here. Upfront prices, every time.</p>
+      <div class="actions">
+        <a class="btn btn--lime" href="../contact.html#book"><span>Book a technician<small>Same-day slots available</small></span><span class="arr">→</span></a>
+        <a class="btn btn--line" href="tel:+15550142290"><span>(555) 014-2290<small>A real person answers, 24/7</small></span><span class="arr">↗</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="strip">
+    <div class="dispatch">
+      <span class="dot"></span><span class="dispatch__label">Live dispatch:</span>
+      <div class="ticker" aria-live="polite"><span>Marcus R. is heading to Oak Park · arriving in 14 min</span></div>
+    </div>
+    <div class="facts"><span><b>4.9</b> on Google · 1,280 reviews</span><span><b>Licensed</b> #HVAC-0042817</span></div>
+  </div>
+</section>
+
+<a class="ph-back" href="index.html">← All hero options</a>
+
+<script>
+  const msgs = [
+    'Marcus R. is heading to Oak Park · arriving in 14 min',
+    'AC repair completed in Westview · 52 min on site',
+    '3 technicians available for same-day visits',
+    'Daniel O. finished a heat pump install on Maple St',
+    'Furnace tune-up booked in Lincoln Park · tomorrow 8–10am',
+  ];
+  const box = document.querySelector('.ticker');
+  let i = 0;
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    setInterval(() => {
+      const cur = box.querySelector('span');
+      i = (i + 1) % msgs.length;
+      const next = document.createElement('span');
+      next.className = 'in';
+      next.textContent = msgs[i];
+      box.appendChild(next);
+      requestAnimationFrame(() => requestAnimationFrame(() => { next.className = ''; cur.className = 'out'; }));
+      setTimeout(() => cur.remove(), 700);
+    }, 3200);
+  }
+</script>
+</body>
+</html>

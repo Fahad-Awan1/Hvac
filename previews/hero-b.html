@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hero B — Set Your Temperature</title>
+<link rel="icon" href="../assets/img/logo-mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&display=swap">
+<link rel="preload" as="image" href="../assets/img/bg-ok.webp" imagesrcset="../assets/img/bg-ok-sm.webp 760w, ../assets/img/bg-ok.webp 1600w" imagesizes="100vw">
+<link rel="stylesheet" href="shared.css">
+<style>
+  /* --accent: on the dark photo · --dial: on the white thermostat */
+  :root { --accent: #c6f432; --accent-ink: #0a2a1a; --dial: #1b6a3e; }
+  body { background: #0a1a12; }
+
+  .stage { position: relative; min-height: 100vh; min-height: 100svh; overflow: hidden; color: #fff; }
+  .bg { position: absolute; inset: 0; }
+  .bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity .5s linear; animation: drift 24s ease-in-out infinite alternate; }
+  .bg .cold, .bg .hot { opacity: 0; }
+  @keyframes drift { from { transform: scale(1.04); } to { transform: scale(1.12) translate(-1%, -1%); } }
+  .bg::after { content: ""; position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(5, 18, 12, .82) 0%, rgba(5, 18, 12, .5) 40%, rgba(5, 18, 12, .08) 75%, rgba(5, 18, 12, 0) 100%),
+                linear-gradient(to top, rgba(5, 18, 12, .45), transparent 35%); }
+  .credit { position: absolute; right: var(--gutter); bottom: 14px; z-index: 2; font-size: .68rem; color: rgba(255, 255, 255, .45); }
+
+  .hero { position: relative; z-index: 1; min-height: 100vh; min-height: 100svh; display: grid; grid-template-columns: 1fr minmax(320px, 500px); grid-template-areas: "copy dial"; align-items: center; gap: clamp(30px, 6vw, 100px); padding: 120px var(--gutter) 60px; max-width: 1360px; margin: 0 auto; }
+  .copy { grid-area: copy; }
+  .kicker { display: inline-flex; align-items: center; gap: 10px; font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: rgba(255, 255, 255, .7); margin-bottom: 22px; }
+  .kicker i { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); transition: background-color .6s; }
+  h1 { font-size: clamp(2.7rem, 6vw, 5.6rem); font-weight: 750; letter-spacing: -.05em; line-height: .95; min-height: 2em; transition: opacity .35s, transform .45s var(--ease); text-wrap: balance; }
+  h1 em { font-style: normal; color: var(--accent); transition: color .6s; }
+  .lead { color: rgba(255, 255, 255, .8); font-size: 1.08rem; line-height: 1.6; max-width: 40ch; margin: 24px 0 34px; min-height: 3.2em; transition: opacity .35s; }
+  .is-swapping h1, .is-swapping .lead { opacity: 0; transform: translateY(8px); }
+  .actions { display: flex; flex-wrap: wrap; gap: 14px 22px; align-items: center; }
+  .btn { display: inline-flex; align-items: center; gap: 12px; height: 58px; padding: 0 28px; border-radius: 99px; background: var(--accent); color: var(--accent-ink); font-weight: 700; transition: background-color .6s, transform .3s var(--ease); }
+  .btn:hover { transform: translateY(-2px); }
+  .tel { font-weight: 700; border-bottom: 1.5px solid rgba(255, 255, 255, .6); padding-bottom: 2px; }
+  .note { margin-top: 34px; font-size: .84rem; color: rgba(255, 255, 255, .65); display: flex; gap: 20px; flex-wrap: wrap; }
+  .note b { color: #fff; }
+
+  .dial-wrap { grid-area: dial; position: relative; width: 100%; max-width: 500px; justify-self: center; }
+  .dial { position: relative; aspect-ratio: 1; touch-action: none; user-select: none; cursor: grab; color: var(--ink); }
+  .dial:active { cursor: grabbing; }
+  .dial svg { width: 100%; height: 100%; overflow: visible; }
+  .face { fill: #fff; filter: drop-shadow(0 40px 60px rgba(0, 0, 0, .45)); }
+  .face-inner { fill: #f6f7f3; stroke: rgba(12, 31, 21, .06); }
+  .track { fill: none; stroke: rgba(12, 31, 21, .08); stroke-width: 14; stroke-linecap: round; }
+  .prog { fill: none; stroke: var(--dial); stroke-width: 14; stroke-linecap: round; stroke-dasharray: 1; transition: stroke .6s; }
+  .tick { stroke: rgba(12, 31, 21, .2); stroke-width: 2; stroke-linecap: round; }
+  .tick.major { stroke: rgba(12, 31, 21, .45); }
+  .knob { fill: #fff; stroke: var(--dial); stroke-width: 6; transition: stroke .6s; filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .25)); }
+  .knob-hit { fill: transparent; cursor: grab; }
+  .knob-hit:focus { outline: none; }
+  .knob-hit:focus-visible + .knob { stroke-width: 9; }
+  .scale-lbl { font-size: 13px; fill: #5d6b62; font-weight: 600; font-family: var(--font); }
+  .readout { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; pointer-events: none; }
+  .readout small { font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: #5d6b62; font-weight: 700; }
+  .readout b { font-size: clamp(4.5rem, 9vw, 7rem); font-weight: 700; letter-spacing: -.06em; line-height: 1; font-variant-numeric: tabular-nums; }
+  .readout b sup { font-size: .32em; vertical-align: top; position: relative; top: .5em; color: var(--dial); transition: color .6s; }
+  .readout .state { display: inline-flex; margin: 8px auto 0; padding: 6px 14px; border-radius: 99px; background: var(--dial); color: #fff; font-size: .8rem; font-weight: 700; transition: background-color .6s; }
+  .hint { text-align: center; margin-top: 16px; font-size: .84rem; color: rgba(255, 255, 255, .7); }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; grid-template-areas: "copy" "dial"; padding-top: 100px; gap: 26px; }
+    .bg::after { background: linear-gradient(to bottom, rgba(5, 18, 12, .82) 0%, rgba(5, 18, 12, .7) 55%, rgba(5, 18, 12, .45) 100%); }
+    h1 { min-height: 0; }
+    .dial-wrap { max-width: 330px; }
+  }
+  @media (max-width: 480px) {
+    h1 { font-size: 2.6rem; min-height: 2em; }
+    .lead { font-size: .98rem; margin: 18px 0 24px; }
+    .btn { width: 100%; justify-content: center; }
+    .note { margin-top: 24px; }
+  }
+</style>
+</head>
+<body>
+<header class="ph-header ph-light">
+  <a href="../index.html" class="ph-logo"><img src="../assets/img/logo-mark.svg" alt="" width="38" height="38">HVAC</a>
+  <nav class="ph-nav"><a href="../services.html">Services</a><a href="../projects.html">Projects</a><a href="../plans.html">Plans &amp; Pricing</a><a href="../about.html">About</a><a href="../contact.html">Contact</a></nav>
+  <div class="ph-right"><a class="ph-tel" href="tel:+15550142290">(555) 014-2290</a><a class="ph-cta" href="../contact.html#book">Book a visit</a></div>
+</header>
+
+<div class="stage">
+  <div class="bg" aria-hidden="true">
+    <img class="ok" src="../assets/img/bg-ok.webp" srcset="../assets/img/bg-ok-sm.webp 760w, ../assets/img/bg-ok.webp 1600w" sizes="100vw" alt="" fetchpriority="high">
+    <img class="cold" id="bgCold" src="../assets/img/bg-cold.webp" srcset="../assets/img/bg-cold-sm.webp 760w, ../assets/img/bg-cold.webp 1600w" sizes="100vw" alt="">
+    <img class="hot" id="bgHot" src="../assets/img/bg-hot.webp" srcset="../assets/img/bg-hot-sm.webp 760w, ../assets/img/bg-hot.webp 1600w" sizes="100vw" alt="">
+  </div>
+
+  <section class="hero">
+    <div class="copy">
+      <p class="kicker"><i></i>How does your home feel right now?</p>
+      <div class="swap">
+        <h1 id="title">Feels perfect? <em>Let's keep it that way.</em></h1>
+        <p class="lead" id="lead">Twice-yearly tune-ups prevent 85% of breakdowns. Join the Comfort Club from $19 a month.</p>
+      </div>
+      <div class="actions">
+        <a class="btn" id="cta" href="../plans.html">See maintenance plans <span>→</span></a>
+        <a class="tel" href="tel:+15550142290">or call (555) 014-2290</a>
+      </div>
+      <p class="note"><span><b>4.9★</b> from 1,280 reviews</span><span><b>Same-day</b> repairs</span><span><b>24/7</b> emergency line</span></p>
+    </div>
+
+    <div class="dial-wrap">
+      <div class="dial" id="dial">
+        <svg viewBox="0 0 400 400">
+          <circle class="face" cx="200" cy="200" r="190"/>
+          <circle class="face-inner" cx="200" cy="200" r="128"/>
+          <g id="ticks"></g>
+          <path class="track" id="track"/>
+          <path class="prog" id="prog" pathLength="1"/>
+          <text class="scale-lbl" id="lblMin" text-anchor="middle">60°</text>
+          <text class="scale-lbl" id="lblMax" text-anchor="middle">85°</text>
+          <circle class="knob-hit" id="knobHit" r="26" tabindex="0" role="slider" aria-label="Indoor temperature" aria-valuemin="60" aria-valuemax="85" aria-valuenow="72"/>
+          <circle class="knob" id="knob" r="15"/>
+        </svg>
+        <div class="readout"><small>Indoor</small><b><span id="temp">72</span><sup>°F</sup></b><span class="state" id="state">Just right</span></div>
+      </div>
+      <p class="hint">Drag the dial, or use the arrow keys</p>
+    </div>
+  </section>
+  <p class="credit">Photos: Unsplash</p>
+</div>
+
+<a class="ph-back" href="index.html">← All hero options</a>
+
+<script>
+  const MIN = 60, MAX = 85, R = 160, C = 200, A0 = -135, A1 = 135;
+  const $ = (id) => document.getElementById(id);
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const pt = (deg, r = R) => { const a = (deg * Math.PI) / 180; return [C + r * Math.sin(a), C - r * Math.cos(a)]; };
+  const arc = (from, to) => { const [x0, y0] = pt(from), [x1, y1] = pt(to); return `M${x0} ${y0} A${R} ${R} 0 ${to - from > 180 ? 1 : 0} 1 ${x1} ${y1}`; };
+  $('track').setAttribute('d', arc(A0, A1));
+  $('prog').setAttribute('d', arc(A0, A1));
+  let ticks = '';
+  for (let i = 0; i <= 50; i++) {
+    const d = A0 + (i / 50) * 270, major = i % 10 === 0;
+    const [x0, y0] = pt(d, 178), [x1, y1] = pt(d, major ? 188 : 184);
+    ticks += `<line class="tick${major ? ' major' : ''}" x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}"/>`;
+  }
+  $('ticks').innerHTML = ticks;
+  [['lblMin', A0], ['lblMax', A1]].forEach(([id, d]) => { const [x, y] = pt(d, 150); $(id).setAttribute('x', x); $(id).setAttribute('y', y + 30); });
+
+  const STATES = {
+    cold: { accent: '#8fd8ff', dial: '#1f7fb8', pill: 'Too cold', title: 'Too cold? <em>Let’s warm you up.</em>', lead: 'Furnaces, boilers and heat pumps repaired the same day, by technicians who show you the problem before they fix it.', cta: 'Book heating repair', href: '../contact.html?service=heating#book' },
+    ok: { accent: '#c6f432', dial: '#1b6a3e', pill: 'Just right', title: 'Feels perfect? <em>Let’s keep it that way.</em>', lead: 'Twice-yearly tune-ups prevent 85% of breakdowns. Join the Comfort Club from $19 a month.', cta: 'See maintenance plans', href: '../plans.html' },
+    hot: { accent: '#ffb066', dial: '#d9621e', pill: 'Too warm', title: 'Too warm? <em>Let’s cool things down.</em>', lead: 'Warm air, strange noises or a frozen coil? Most AC repairs are finished on the first visit, at a price you approve upfront.', cta: 'Book AC repair', href: '../contact.html?service=repair#book' },
+  };
+  const root = document.documentElement;
+  const copy = document.querySelector('.copy');
+  let temp = 72, state = null, swapT;
+
+  function render(t) {
+    temp = clamp(t, MIN, MAX);
+    const k = (temp - MIN) / (MAX - MIN);
+    const [x, y] = pt(A0 + k * 270);
+    $('knob').setAttribute('cx', x); $('knob').setAttribute('cy', y);
+    $('knobHit').setAttribute('cx', x); $('knobHit').setAttribute('cy', y);
+    $('knobHit').setAttribute('aria-valuenow', Math.round(temp));
+    $('prog').style.strokeDashoffset = 1 - k;
+    $('temp').textContent = Math.round(temp);
+    // crossfade the real photos: frost below 70°, sunlight above 74°
+    $('bgCold').style.opacity = clamp((70 - temp) / 5).toFixed(3);
+    $('bgHot').style.opacity = clamp((temp - 74) / 5).toFixed(3);
+
+    const s = temp <= 67.5 ? 'cold' : temp >= 74.5 ? 'hot' : 'ok';
+    if (s === state) return;
+    const first = state === null;
+    state = s;
+    const d = STATES[s];
+    root.style.setProperty('--accent', d.accent);
+    root.style.setProperty('--dial', d.dial);
+    $('state').textContent = d.pill;
+    const apply = () => {
+      $('title').innerHTML = d.title; $('lead').textContent = d.lead;
+      $('cta').firstChild.textContent = d.cta + ' '; $('cta').href = d.href;
+      copy.classList.remove('is-swapping');
+    };
+    if (first) return apply();
+    copy.classList.add('is-swapping');
+    clearTimeout(swapT);
+    swapT = setTimeout(apply, 300);
+  }
+  render(72);
+
+  const dial = $('dial');
+  let dragging = false, touched = false;
+  function fromPointer(e) {
+    const r = dial.getBoundingClientRect();
+    const x = e.clientX - (r.left + r.width / 2), y = e.clientY - (r.top + r.height / 2);
+    const deg = clamp((Math.atan2(x, -y) * 180) / Math.PI, A0, A1);
+    render(MIN + ((deg - A0) / 270) * (MAX - MIN));
+  }
+  dial.addEventListener('pointerdown', (e) => { dragging = touched = true; dial.setPointerCapture(e.pointerId); fromPointer(e); });
+  dial.addEventListener('pointermove', (e) => dragging && fromPointer(e));
+  dial.addEventListener('pointerup', () => { dragging = false; render(Math.round(temp)); });
+  $('knobHit').addEventListener('keydown', (e) => {
+    const step = { ArrowUp: 1, ArrowRight: 1, ArrowDown: -1, ArrowLeft: -1 }[e.key];
+    if (step) { e.preventDefault(); touched = true; render(Math.round(temp) + step); }
+  });
+
+  // one-time demo sweep so visitors notice the dial is interactive
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const demo = [[72, 80, 1400], [80, 63, 2000], [63, 72, 1200]];
+    let i = 0;
+    const run = () => {
+      if (touched || i >= demo.length) return;
+      const [a, b, dur] = demo[i++], t0 = performance.now();
+      const step = (t) => {
+        if (touched) return;
+        const p = Math.min(1, (t - t0) / dur), e = p < .5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+        render(a + (b - a) * e);
+        p < 1 ? requestAnimationFrame(step) : setTimeout(run, 1600);
+      };
+      requestAnimationFrame(step);
+    };
+    setTimeout(run, 1000);
+  }
+</script>
+</body>
+</html>

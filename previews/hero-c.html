@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hero C — Heat | Cool Split</title>
+<link rel="icon" href="../assets/img/logo-mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&display=swap">
+<link rel="stylesheet" href="shared.css">
+<style>
+  .split { --x: 50%; position: relative; height: 100vh; height: 100svh; min-height: 600px; overflow: hidden; color: #fff; background: #111; touch-action: pan-y; }
+  .pane { position: absolute; inset: 0; }
+  .pane img { width: 100%; height: 100%; object-fit: cover; }
+  .pane::after { content: ""; position: absolute; inset: 0; }
+  .pane--cool::after { background: linear-gradient(160deg, rgba(14, 92, 120, .55), rgba(4, 34, 40, .88)); }
+  .pane--warm { clip-path: inset(0 calc(100% - var(--x)) 0 0); }
+  .pane--warm img { filter: saturate(.8); }
+  .pane--warm::after { background: linear-gradient(200deg, rgba(232, 112, 36, .6), rgba(70, 22, 6, .9)); }
+
+  .side { position: absolute; z-index: 2; bottom: 40px; max-width: 300px; }
+  .pane--warm .side { left: var(--gutter); }
+  .pane--cool .side { right: var(--gutter); text-align: right; }
+  .side .tag { font-size: .74rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 700; opacity: .75; }
+  .side h2 { font-size: clamp(1.6rem, 2.6vw, 2.2rem); letter-spacing: -.03em; margin: 6px 0 6px; }
+  .side p { font-size: .9rem; opacity: .8; margin-bottom: 14px; }
+  .side a { display: inline-flex; gap: 8px; font-weight: 700; font-size: .9rem; border-bottom: 1.5px solid currentColor; padding-bottom: 2px; }
+
+  .center { position: absolute; z-index: 3; inset: 0; display: grid; place-content: center; text-align: center; padding: 0 var(--gutter); pointer-events: none; }
+  h1 { font-size: clamp(3rem, 9vw, 9rem); font-weight: 800; letter-spacing: -.06em; line-height: .88; text-shadow: 0 10px 40px rgba(0, 0, 0, .25); }
+  h1 .w { color: #ffc58f; }
+  h1 .c { color: #9fe6ff; }
+  .center p { margin: 24px auto 30px; max-width: 46ch; font-size: 1.05rem; opacity: .85; line-height: 1.55; }
+  .ctas { display: flex; justify-content: center; align-items: center; gap: 22px; flex-wrap: wrap; pointer-events: auto; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; height: 58px; padding: 0 28px; border-radius: 99px; background: var(--lime); color: var(--green-deep); font-weight: 700; transition: transform .3s var(--ease); }
+  .btn:hover { transform: translateY(-2px); }
+  .tel { font-weight: 700; border-bottom: 1.5px solid rgba(255, 255, 255, .6); padding-bottom: 2px; }
+
+  .divider { position: absolute; z-index: 2; top: 0; bottom: 0; left: var(--x); width: 2px; margin-left: -1px; background: rgba(255, 255, 255, .85); pointer-events: none; }
+  .handle { position: absolute; top: 90%; left: 50%; width: 58px; height: 58px; margin: -29px 0 0 -29px; border-radius: 50%; background: #fff; color: var(--ink); display: grid; place-items: center; font-weight: 800; box-shadow: 0 10px 30px rgba(0, 0, 0, .3); }
+  .handle span { font-size: 1.1rem; letter-spacing: -.1em; }
+
+  @media (max-width: 760px) {
+    .split { min-height: 640px; }
+    .center { place-content: start center; padding-top: 130px; }
+    h1 { font-size: 3.2rem; }
+    .center p { font-size: .95rem; margin: 16px auto 22px; }
+    .side { bottom: 26px; max-width: 46vw; }
+    .side h2 { font-size: 1.35rem; }
+    .side p { display: none; }
+    .handle { top: 64%; }
+  }
+</style>
+</head>
+<body>
+<header class="ph-header ph-light">
+  <a href="../index.html" class="ph-logo"><img src="../assets/img/logo-mark.svg" alt="" width="38" height="38">HVAC</a>
+  <nav class="ph-nav"><a href="../services.html">Services</a><a href="../projects.html">Projects</a><a href="../plans.html">Plans &amp; Pricing</a><a href="../about.html">About</a><a href="../contact.html">Contact</a></nav>
+  <div class="ph-right"><a class="ph-tel" href="tel:+15550142290">(555) 014-2290</a><a class="ph-cta" href="../contact.html#book">Book a visit</a></div>
+</header>
+
+<section class="split" id="split">
+  <div class="pane pane--cool">
+    <img src="../assets/img/ac-units.webp" srcset="../assets/img/ac-units-sm.webp 640w, ../assets/img/ac-units.webp 1200w" sizes="100vw" alt="Air conditioning units on a building wall" fetchpriority="high">
+    <div class="side"><p class="tag">Summer</p><h2>Cooling</h2><p>Central AC · Ductless mini-splits · Heat pumps</p><a href="../services.html#cooling">AC services →</a></div>
+  </div>
+  <div class="pane pane--warm">
+    <img src="../assets/img/living.webp" srcset="../assets/img/living-sm.webp 640w, ../assets/img/living.webp 1000w" sizes="100vw" alt="Warm, comfortable living room" fetchpriority="high">
+    <div class="side"><p class="tag">Winter</p><h2>Heating</h2><p>Furnaces · Boilers · Cold-climate heat pumps</p><a href="../services.html#heating">Heating services →</a></div>
+  </div>
+
+  <div class="divider" aria-hidden="true">
+    <div class="handle"><span>◀▶</span></div>
+  </div>
+
+  <div class="center">
+    <h1><span class="w">Too cold.</span><br><span class="c">Too hot.</span><br>Fixed today.</h1>
+    <p>One local team for every season: furnaces, air conditioners and heat pumps, repaired and installed by Springfield's best-rated technicians.</p>
+    <div class="ctas">
+      <a class="btn" href="../contact.html#book">Book a technician →</a>
+      <a class="tel" href="tel:+15550142290">(555) 014-2290 · 24/7</a>
+    </div>
+  </div>
+</section>
+
+<a class="ph-back" href="index.html">← All hero options</a>
+
+<script>
+  const el = document.getElementById('split');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hover = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  let x = 50, target = 50, lastInput = 0;
+  const setTarget = (clientX) => {
+    const r = el.getBoundingClientRect();
+    target = Math.min(75, Math.max(25, ((clientX - r.left) / r.width) * 100));
+    lastInput = performance.now();
+  };
+  el.addEventListener('pointermove', (e) => { if (hover || e.pressure > 0) setTarget(e.clientX); });
+  el.addEventListener('pointerdown', (e) => setTarget(e.clientX));
+  const loop = (t) => {
+    // auto-sweep when idle (always on touch devices until the user drags)
+    if (!reduce && t - lastInput > (hover ? 2500 : 3500)) target = 50 + Math.sin(t / 1400) * 20;
+    x += (target - x) * (reduce ? 1 : 0.08);
+    el.style.setProperty('--x', x.toFixed(2) + '%');
+    requestAnimationFrame(loop);
+  };
+  requestAnimationFrame(loop);
+</script>
+</body>
+</html>

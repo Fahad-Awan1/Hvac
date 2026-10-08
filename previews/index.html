@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hero Options</title>
+<link rel="icon" href="../assets/img/logo-mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&display=swap">
+<link rel="stylesheet" href="shared.css">
+<style>
+  main { max-width: 1280px; margin: 0 auto; padding: 56px var(--gutter) 80px; }
+  h1 { font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -.04em; }
+  .intro { color: var(--muted); margin: 12px 0 40px; max-width: 60ch; line-height: 1.6; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .card { display: flex; flex-direction: column; border-radius: 22px; overflow: hidden; background: #fff; border: 1px solid rgba(12, 31, 21, .08); transition: transform .4s var(--ease), box-shadow .4s; }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 24px 50px -24px rgba(10, 42, 26, .35); }
+  .thumb { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: var(--green-deep); }
+  .thumb iframe { position: absolute; top: 0; left: 0; width: 1440px; height: 900px; border: 0; transform-origin: 0 0; pointer-events: none; }
+  .meta { padding: 20px 22px 24px; }
+  .meta b { font-size: .75rem; letter-spacing: .14em; color: var(--green-3); }
+  .meta h2 { font-size: 1.25rem; margin: 6px 0 8px; letter-spacing: -.02em; }
+  .meta p { color: var(--muted); font-size: .9rem; line-height: 1.55; }
+  .meta span { display: inline-block; margin-top: 14px; font-weight: 700; font-size: .9rem; }
+  .old { margin-top: 30px; font-size: .9rem; color: var(--muted); }
+  .old a { text-decoration: underline; }
+  @media (max-width: 960px) { .grid { grid-template-columns: 1fr; max-width: 560px; } }
+</style>
+</head>
+<body>
+<main>
+  <a href="../index.html" class="ph-logo" style="margin-bottom:34px"><img src="../assets/img/logo-mark.svg" alt="" width="38" height="38">HVAC</a>
+  <h1>Hero section options</h1>
+  <p class="intro">Three alternative directions for the homepage hero. Open each one full-screen, and try resizing the window or viewing on your phone. Each is fully responsive and interactive.</p>
+  <div class="grid">
+    <a class="card" href="hero-a.html">
+      <div class="thumb"><iframe src="hero-a.html" title="Preview A" loading="lazy" tabindex="-1"></iframe></div>
+      <div class="meta"><b>OPTION A</b><h2>Cinematic local</h2><p>Full-screen photo of your crew, a confident local headline and a live dispatch ticker. Feels like a real, established business.</p><span>Open preview →</span></div>
+    </a>
+    <a class="card" href="hero-b.html">
+      <div class="thumb"><iframe src="hero-b.html" title="Preview B" loading="lazy" tabindex="-1"></iframe></div>
+      <div class="meta"><b>OPTION B</b><h2>Set your temperature</h2><p>A big interactive thermostat. Drag it and the page colour, headline and button change to match: heating, cooling or maintenance.</p><span>Open preview →</span></div>
+    </a>
+    <a class="card" href="hero-c.html">
+      <div class="thumb"><iframe src="hero-c.html" title="Preview C" loading="lazy" tabindex="-1"></iframe></div>
+      <div class="meta"><b>OPTION C</b><h2>Heat | Cool split</h2><p>Warm and cool halves of the screen with a divider that follows your mouse (auto-sweeps on phones). Bold and typographic.</p><span>Open preview →</span></div>
+    </a>
+  </div>
+  <p class="old">Compare with the <a href="../index.html">current homepage hero</a>.</p>
+
+  <h1 style="margin-top:80px">"Total climate control" section options</h1>
+  <p class="intro">Replacements for the particle snowflake / flame / leaf / house section. Open each one and <b>scroll</b>: the section is pinned and changes through Cool → Heat → Breathe → Save.</p>
+  <div class="grid">
+    <a class="card" href="story-a.html">
+      <div class="meta"><b>OPTION A</b><h2>One home, every season</h2><p>Real photos of a home through summer, winter, spring and evening. An "Inside 72°F" tag stays pinned on the house, and a "Running now" card shows the real equipment doing the work.</p><span>Open preview →</span></div>
+    </a>
+    <a class="card" href="story-b.html">
+      <div class="meta"><b>OPTION B</b><h2>Outside vs inside</h2><p>Real seasonal photos with two huge numbers: Outside 98° → 12° → pollen → $312, while Inside stays 72°. The point lands in one second.</p><span>Open preview →</span></div>
+    </a>
+    <a class="card" href="story-c.html">
+      <div class="meta"><b>OPTION C</b><h2>The equipment behind it</h2><p>Product-page style: the photo swaps to the real AC, furnace, purifier and thermostat, with pop-in feature labels on each.</p><span>Open preview →</span></div>
+    </a>
+  </div>
+</main>
+<script>
+  const fit = () => document.querySelectorAll('.thumb').forEach((t) => {
+    t.querySelector('iframe').style.transform = `scale(${t.clientWidth / 1440})`;
+  });
+  fit();
+  addEventListener('resize', fit);
+</script>
+</body>
+</html>

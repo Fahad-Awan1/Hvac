@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Story B — Outside vs Inside</title>
+<link rel="icon" href="../assets/img/logo-mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Plus+Jakarta+Sans:wght@400..800&display=swap">
+<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="story-shared.css">
+<style>
+  .story { height: 420vh; position: relative; background: var(--green-deep); color: #fff; }
+  .pin { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+  .bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.08); transition: opacity .9s ease, transform 6s ease-out; }
+  .bg img.is-on { opacity: 1; transform: scale(1); }
+  .bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(5, 18, 12, .85) 0%, rgba(5, 18, 12, .55) 50%, rgba(5, 18, 12, .35) 100%), linear-gradient(to top, rgba(5, 18, 12, .7), transparent 50%); }
+  .bg { position: absolute; inset: 0; }
+
+  .wrap { position: relative; z-index: 1; height: 100%; max-width: 1360px; margin: 0 auto; padding: 110px var(--gutter) 40px; display: grid; grid-template-rows: auto 1fr auto; gap: 20px; }
+  .title { font-size: clamp(2.2rem, 4.6vw, 4rem); font-weight: 800; letter-spacing: -.045em; line-height: 1; max-width: 16ch; }
+  .title em { font-family: "Instrument Serif", serif; font-style: italic; font-weight: 400; color: var(--lime); }
+
+  .meters { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: clamp(16px, 4vw, 60px); align-self: center; }
+  .meter small { display: block; font-size: .78rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 700; color: rgba(255, 255, 255, .65); margin-bottom: 6px; }
+  .meter b { display: block; font-size: clamp(4rem, 11vw, 10rem); font-weight: 800; letter-spacing: -.06em; line-height: .9; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .meter b sup { font-size: .35em; vertical-align: top; position: relative; top: .35em; margin-left: .05em; }
+  .meter > span { display: block; margin-top: 10px; font-size: .95rem; color: rgba(255, 255, 255, .75); }
+  .meter--out b { color: var(--out, #ffb066); transition: color .6s; }
+  .meter--in { text-align: right; }
+  .meter--in b { color: var(--lime); }
+  .vs { width: 1px; align-self: stretch; background: linear-gradient(transparent, rgba(255, 255, 255, .35), transparent); position: relative; }
+  .vs::after { content: "vs"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 8px 10px; border-radius: 99px; background: rgba(255, 255, 255, .12); backdrop-filter: blur(6px); font-size: .75rem; font-weight: 700; letter-spacing: .1em; }
+
+  .bottom { display: grid; grid-template-columns: 1fr minmax(300px, 440px); align-items: end; gap: 30px; }
+  .steps-rail { display: flex; gap: 8px; }
+  .steps-rail li { list-style: none; flex: 1; max-width: 140px; font-size: .78rem; font-weight: 700; color: rgba(255, 255, 255, .5); transition: color .4s; }
+  .steps-rail li::before { content: ""; display: block; height: 3px; border-radius: 3px; background: rgba(255, 255, 255, .18); margin-bottom: 10px; transition: background-color .4s; }
+  .steps-rail li.is-on { color: #fff; }
+  .steps-rail li.is-on::before, .steps-rail li.is-done::before { background: var(--lime); }
+  .steps-rail { padding: 0; margin: 0; }
+
+  @media (max-width: 900px) {
+    .wrap { padding-top: 96px; padding-bottom: 24px; }
+    .meters { grid-template-columns: 1fr 1fr; gap: 14px; }
+    .vs { display: none; }
+    .meter--in { text-align: left; }
+    .meter b { font-size: clamp(3.2rem, 15vw, 5rem); }
+    .meter > span { font-size: .82rem; }
+    .bottom { grid-template-columns: 1fr; }
+    .steps-rail { order: 2; }
+  }
+</style>
+</head>
+<body>
+<div class="spacer"><p>Option B · Outside vs inside</p><h2>Scroll down ↓</h2></div>
+
+<section class="story" data-story>
+  <div class="pin">
+    <div class="bg" aria-hidden="true">
+      <img class="is-on" src="../assets/img/season-cool.webp" srcset="../assets/img/season-cool-sm.webp 760w, ../assets/img/season-cool.webp 1600w" sizes="100vw" alt="">
+      <img src="../assets/img/season-heat.webp" srcset="../assets/img/season-heat-sm.webp 760w, ../assets/img/season-heat.webp 1600w" sizes="100vw" alt="" loading="lazy">
+      <img src="../assets/img/season-breathe.webp" srcset="../assets/img/season-breathe-sm.webp 760w, ../assets/img/season-breathe.webp 1600w" sizes="100vw" alt="" loading="lazy">
+      <img src="../assets/img/season-save.webp" srcset="../assets/img/season-save-sm.webp 760w, ../assets/img/season-save.webp 1600w" sizes="100vw" alt="" loading="lazy">
+    </div>
+
+    <div class="wrap">
+      <div>
+        <p class="eyebrow-l">One partner, every season</p>
+        <h2 class="title">Outside changes. <em>Inside doesn't.</em></h2>
+      </div>
+
+      <div class="meters" aria-live="polite">
+        <div class="meter meter--out"><small data-out-label>Outside</small><b><span data-out-val>98</span><sup data-out-unit>°F</sup></b><span data-out-note>Summer heatwave</span></div>
+        <div class="vs" aria-hidden="true"></div>
+        <div class="meter meter--in"><small data-in-label>Inside</small><b><span data-in-val>72</span><sup data-in-unit>°F</sup></b><span data-in-note>Cool, quiet &amp; even</span></div>
+      </div>
+
+      <div class="bottom">
+        <ol class="steps-rail"><li class="is-on">01 Cool</li><li>02 Heat</li><li>03 Breathe</li><li>04 Save</li></ol>
+        <div class="cards">
+          <article class="card is-active"><span class="card__num">01 / Cool</span><h3>Summer, sorted.</h3><p>High-efficiency AC and ductless mini-splits sized precisely to your home, so no hot rooms and no short cycling.</p><span class="chip">❄ Up to 26 SEER2</span></article>
+          <article class="card"><span class="card__num">02 / Heat</span><h3>Winter, handled.</h3><p>Furnaces, boilers and cold-climate heat pumps that deliver even, cozy warmth, with safety checks on every visit.</p><span class="chip">🔥 98% AFUE furnaces</span></article>
+          <article class="card"><span class="card__num">03 / Breathe</span><h3>Cleaner air inside.</h3><p>HEPA filtration, UV purification and whole-home humidity control remove up to 99% of airborne allergens.</p><span class="chip">🍃 MERV 13+ filtration</span></article>
+          <article class="card"><span class="card__num">04 / Save</span><h3>A smarter home.</h3><p>Smart thermostats, zoning and annual tune-ups that keep your system efficient and your bills predictable.</p><span class="chip">⚡ Avg. $480 saved / yr</span></article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="spacer spacer--end"><p>End of section</p><a href="index.html">← Back to all options</a></div>
+<a class="ph-back" href="index.html">← All options</a>
+
+<script>
+  const STEPS = [
+    { out: [98, '°F', 'Outside', 'Summer heatwave', '#ffb066'], in: [72, '°F', 'Inside', 'Cool, quiet & even'] },
+    { out: [12, '°F', 'Outside', 'Snowstorm warning', '#8fd8ff'], in: [72, '°F', 'Inside', 'Warm in every room'] },
+    { out: ['High', '', 'Pollen count', 'Peak allergy season', '#e8f37a'], in: [99, '%', 'Allergens removed', 'HEPA + UV purification'] },
+    { out: ['$312', '', 'Typical bill', 'Old system, no plan', '#ffb066'], in: ['$198', '', 'Your bill', 'Smart thermostat + tune-ups'] },
+  ];
+  const $ = (s) => document.querySelector(s);
+  const story = $('[data-story]');
+  const imgs = [...document.querySelectorAll('.bg img')];
+  const cards = [...document.querySelectorAll('.card')];
+  const rail = [...document.querySelectorAll('.steps-rail li')];
+  let active = -1;
+
+  function tween(el, to) {
+    if (typeof to !== 'number') { el.textContent = to; el.dataset.v = ''; return; }
+    const from = parseFloat(el.dataset.v || el.textContent) || to;
+    el.dataset.v = to;
+    const t0 = performance.now();
+    const step = (t) => {
+      const p = Math.min(1, (t - t0) / 900), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(from + (to - from) * e);
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+  function setStep(i) {
+    if (i === active) return;
+    active = i;
+    imgs.forEach((im, k) => im.classList.toggle('is-on', k === i));
+    cards.forEach((c, k) => c.classList.toggle('is-active', k === i));
+    rail.forEach((r, k) => { r.classList.toggle('is-on', k === i); r.classList.toggle('is-done', k < i); });
+    const s = STEPS[i];
+    tween($('[data-out-val]'), s.out[0]); $('[data-out-unit]').textContent = s.out[1];
+    $('[data-out-label]').textContent = s.out[2]; $('[data-out-note]').textContent = s.out[3];
+    document.querySelector('.meter--out').style.setProperty('--out', s.out[4]);
+    tween($('[data-in-val]'), s.in[0]); $('[data-in-unit]').textContent = s.in[1];
+    $('[data-in-label]').textContent = s.in[2]; $('[data-in-note]').textContent = s.in[3];
+  }
+  const tick = () => {
+    const r = story.getBoundingClientRect();
+    const p = Math.min(1, Math.max(0, -r.top / (r.height - innerHeight)));
+    setStep(Math.min(STEPS.length - 1, Math.floor(p * STEPS.length * 0.999)));
+    requestAnimationFrame(tick);
+  };
+  setStep(0);
+  requestAnimationFrame(tick);
+</script>
+</body>
+</html>

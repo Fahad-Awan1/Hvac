@@ -1,0 +1,34 @@
+/* Shared tokens + header for hero previews (mirrors assets/css/style.css) */
+:root {
+  --ink: #0c1f15; --muted: #5d6b62; --bg: #f4f5ef;
+  --green: #0f3d26; --green-deep: #0a2a1a; --green-3: #1b6a3e;
+  --lime: #c6f432; --heat: #ff7a2f;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  --gutter: clamp(16px, 4vw, 48px);
+  --font: "Plus Jakarta Sans", system-ui, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; }
+body { font-family: var(--font); color: var(--ink); background: var(--bg); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; }
+h1, h2, p { margin: 0; }
+
+.ph-header { position: absolute; inset: 0 0 auto; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 22px var(--gutter); }
+.ph-logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.3rem; letter-spacing: .02em; }
+.ph-logo img { width: 38px; height: 38px; }
+.ph-nav { display: flex; gap: 30px; font-size: .9rem; font-weight: 500; }
+.ph-nav a { opacity: .78; transition: opacity .3s; }
+.ph-nav a:hover { opacity: 1; }
+.ph-right { display: flex; align-items: center; gap: 18px; font-size: .9rem; font-weight: 700; }
+.ph-cta { padding: 12px 20px; border-radius: 99px; background: var(--lime); color: var(--green-deep); font-weight: 700; font-size: .88rem; }
+.ph-light { color: #fff; }
+
+.ph-back { position: fixed; left: 16px; top: 88px; z-index: 50; padding: 10px 14px; border-radius: 99px; background: rgba(10, 42, 26, .9); color: #fff; font-size: .78rem; font-weight: 600; backdrop-filter: blur(8px); }
+.ph-back:hover { background: var(--green); }
+
+@media (max-width: 960px) { .ph-nav, .ph-tel { display: none; } }
+@media (max-width: 760px) { .ph-back { top: auto; bottom: 14px; left: 50%; transform: translateX(-50%); } }
+@media (max-width: 480px) { .ph-header { padding-top: 16px; } .ph-cta { padding: 10px 16px; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }

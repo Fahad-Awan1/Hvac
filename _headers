@@ -1,0 +1,21 @@
+# Netlify / Cloudflare Pages: caching headers (these hosts compress automatically)
+/*.html
+  Cache-Control: no-cache
+
+/
+  Cache-Control: no-cache
+
+/assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/css/*
+  Cache-Control: public, max-age=31536000
+
+/assets/js/*
+  Cache-Control: public, max-age=31536000
+
+/assets/vendor/*
+  Cache-Control: public, max-age=31536000
+
+/assets/img/*
+  Cache-Control: public, max-age=2592000

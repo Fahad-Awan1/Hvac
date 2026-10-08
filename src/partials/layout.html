@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" data-mode="cool">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{title}}</title>
+<meta name="description" content="{{desc}}">
+<meta name="theme-color" content="#0f3d26">
+<link rel="canonical" href="{{url}}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{title}}">
+<meta property="og:description" content="{{desc}}">
+<meta property="og:image" content="assets/img/roof-techs.webp">
+<link rel="icon" href="assets/img/logo-mark.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/instrument-serif-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
+{{preload}}<link rel="stylesheet" href="assets/css/style.min.css?v={{v}}">
+<script>
+  (function () {
+    var d = document.documentElement;
+    d.classList.add('js');
+    try {
+      if (sessionStorage.getItem('hvac-loaded')) d.classList.add('no-preload');
+      if (sessionStorage.getItem('hvac-pt')) { d.classList.add('is-entering'); sessionStorage.removeItem('hvac-pt'); }
+    } catch (e) {}
+    try { var m = localStorage.getItem('hvac-mode'); if (m === 'heat') d.dataset.mode = 'heat'; } catch (e) {}
+    // Failsafe: never leave content hidden (preloader, curtain, reveals) if scripts fail or stall.
+    setTimeout(function () { if (!d.classList.contains('ready')) { d.classList.add('ready', 'reveal-all'); d.classList.remove('is-entering'); } }, 4000);
+  })();
+</script>
+<noscript><style>.preloader, .curtain, .cursor { display: none !important; }</style></noscript>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HVACBusiness","name":"HVAC","description":"Heating, cooling and indoor air quality specialists. 24/7 emergency service.","telephone":"+1-555-014-2290","email":"hello@hvac-comfort.com","address":{"@type":"PostalAddress","streetAddress":"1200 Comfort Avenue, Suite 4","addressLocality":"Springfield","addressRegion":"IL","postalCode":"62701","addressCountry":"US"},"openingHours":"Mo-Sa 07:00-20:00","aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","reviewCount":"1280"}}
+</script>
+</head>
+<body data-page="{{page}}">
+<a class="skip" href="#main">Skip to content</a>
+
+{{> icons}}
+
+<!-- Preloader (first visit per session) -->
+<div class="preloader" aria-hidden="true">
+  <div class="preloader__dial">
+    <svg viewBox="0 0 200 200" class="preloader__ring">
+      <circle cx="100" cy="100" r="88" class="preloader__track"/>
+      <circle cx="100" cy="100" r="88" class="preloader__bar"/>
+    </svg>
+    <div class="preloader__readout"><span class="preloader__num">0</span><sup>%</sup></div>
+    <img src="assets/img/logo-mark.svg" alt="" width="40" height="40" class="preloader__logo">
+  </div>
+  <p class="preloader__text">Calibrating your comfort…</p>
+</div>
+
+<!-- Page transition curtain -->
+<div class="curtain" aria-hidden="true">
+  <div class="curtain__panel"></div>
+  <img src="assets/img/logo-mark.svg" alt="" width="56" height="56" class="curtain__logo">
+</div>
+
+<div class="cursor" aria-hidden="true"><div class="cursor__ring"><span class="cursor__label"></span></div><div class="cursor__dot"></div></div>
+
+{{> header}}
+
+<main id="main">
+{{content}}
+</main>
+
+{{> footer}}
+
+<script src="assets/vendor/lenis.min.js" defer></script>
+<script src="assets/js/main.js?v={{v}}" defer></script>
+<script src="assets/js/chatbot.js?v={{v}}" defer></script>
+</body>
+</html>

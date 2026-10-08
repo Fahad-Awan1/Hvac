@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Story C — The Equipment Behind It</title>
+<link rel="icon" href="../assets/img/logo-mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Plus+Jakarta+Sans:wght@400..800&display=swap">
+<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="story-shared.css">
+<style>
+  .story { height: 420vh; position: relative; background: var(--green-deep); color: #fff; }
+  .pin { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+  .pin::before { content: ""; position: absolute; inset: 0; background: radial-gradient(50% 60% at 75% 50%, rgba(27, 106, 62, .5), transparent 70%); }
+  .wrap { position: relative; height: 100%; max-width: 1360px; margin: 0 auto; padding: 100px var(--gutter) 40px; display: grid; grid-template-columns: .95fr 1.05fr; gap: clamp(30px, 5vw, 80px); align-items: center; }
+  .title { font-size: clamp(2.2rem, 4.2vw, 3.8rem); font-weight: 800; letter-spacing: -.045em; line-height: 1; margin-bottom: 30px; }
+  .title em { font-family: "Instrument Serif", serif; font-style: italic; font-weight: 400; color: var(--lime); }
+
+  /* scroll-driven list: active item expands */
+  .list { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(255, 255, 255, .12); }
+  .item { border-bottom: 1px solid rgba(255, 255, 255, .12); padding: 13px 0; position: relative; }
+  .item::before { content: ""; position: absolute; left: 0; top: -1px; height: 2px; width: 0; background: var(--lime); transition: width .8s var(--ease); }
+  .item.is-active::before { width: 100%; }
+  .item__head { display: flex; align-items: baseline; gap: 16px; }
+  .item__head span { font-size: .78rem; font-weight: 700; color: rgba(255, 255, 255, .45); letter-spacing: .1em; transition: color .4s; }
+  .item__head h3 { font-size: clamp(1.2rem, 2vw, 1.6rem); letter-spacing: -.03em; color: rgba(255, 255, 255, .45); transition: color .4s; }
+  .item.is-active .item__head span { color: var(--lime); }
+  .item.is-active .item__head h3 { color: #fff; }
+  .item__body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .6s var(--ease); }
+  .item__body > div { overflow: hidden; }
+  .item.is-active .item__body { grid-template-rows: 1fr; }
+  .item__body p { color: rgba(255, 255, 255, .72); font-size: .95rem; line-height: 1.55; margin: 10px 0 14px 40px; max-width: 46ch; }
+  .item__body .chip { margin-left: 40px; margin-bottom: 4px; }
+
+  .frame { position: relative; height: min(76vh, 640px); border-radius: 30px; overflow: hidden; background: #0f3d26; box-shadow: 0 40px 80px -30px rgba(0, 0, 0, .6); }
+  .shot { position: absolute; inset: 0; opacity: 0; transition: opacity .7s ease; }
+  .shot.is-on { opacity: 1; }
+  .shot img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.12); transition: transform 1.6s var(--ease); }
+  .shot.is-on img { transform: scale(1); }
+  .shot::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(5, 18, 12, .45), transparent 45%); }
+
+  .hot { position: absolute; z-index: 2; left: var(--x); top: var(--y); display: flex; align-items: center; gap: 10px; transform: translate(-11px, -11px); }
+  .hot i { position: relative; width: 22px; height: 22px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 0 rgba(198, 244, 50, .6); flex: none; animation: ping 2s infinite; }
+  .hot i::after { content: ""; position: absolute; inset: 7px; border-radius: 50%; background: var(--green-deep); }
+  @keyframes ping { 70% { box-shadow: 0 0 0 14px rgba(198, 244, 50, 0); } 100% { box-shadow: 0 0 0 0 rgba(198, 244, 50, 0); } }
+  .hot b { padding: 9px 14px; border-radius: 12px; background: rgba(255, 255, 255, .95); color: var(--green-deep); font-size: .84rem; font-weight: 700; white-space: nowrap; box-shadow: 0 10px 24px rgba(0, 0, 0, .25); }
+  .hot--l { flex-direction: row-reverse; transform: translate(calc(-100% + 11px), -11px); }
+  .hot { opacity: 0; scale: .6; transition: opacity .4s, scale .5s var(--ease); }
+  .shot.is-on .hot { opacity: 1; scale: 1; }
+  .shot.is-on .hot:nth-of-type(1) { transition-delay: .35s; }
+  .shot.is-on .hot:nth-of-type(2) { transition-delay: .55s; }
+  .shot.is-on .hot:nth-of-type(3) { transition-delay: .75s; }
+  .frame__tag { position: absolute; z-index: 3; left: 20px; bottom: 18px; font-size: .78rem; font-weight: 700; padding: 8px 14px; border-radius: 99px; background: rgba(0, 0, 0, .4); backdrop-filter: blur(8px); }
+
+  @media (max-width: 900px) {
+    .wrap { grid-template-columns: 1fr; grid-template-rows: auto 1fr; padding-top: 88px; padding-bottom: 20px; gap: 18px; align-items: stretch; }
+    .frame { order: -1; height: 42vh; height: 42svh; border-radius: 22px; }
+    .title { font-size: 1.7rem; margin-bottom: 12px; }
+    .eyebrow-l { margin-bottom: 10px; }
+    /* phones: only the active step is shown (the frame tag shows 01/04 progress) */
+    .item:not(.is-active) { display: none; }
+    .list { border-top: 0; }
+    .item.is-active::before { width: 100%; }
+    .item { padding: 11px 0; }
+    .item__body p { margin-left: 0; font-size: .86rem; margin-top: 8px; }
+    .item__body .chip { margin-left: 0; }
+    .hot b { font-size: .72rem; padding: 6px 10px; }
+    .hot i { width: 18px; height: 18px; }
+    .hot i::after { inset: 6px; }
+  }
+</style>
+</head>
+<body>
+<div class="spacer"><p>Option C · The equipment behind it</p><h2>Scroll down ↓</h2></div>
+
+<section class="story" data-story>
+  <div class="pin">
+    <div class="wrap">
+      <div class="copy">
+        <p class="eyebrow-l">One partner, every season</p>
+        <h2 class="title">The systems that keep <em>every season</em> comfortable.</h2>
+        <ol class="list">
+          <li class="item is-active"><div class="item__head"><span>01</span><h3>Cooling</h3></div><div class="item__body"><div><p>High-efficiency AC and ductless mini-splits sized precisely to your home, so no hot rooms and no short cycling.</p><span class="chip">❄ Up to 26 SEER2</span></div></div></li>
+          <li class="item"><div class="item__head"><span>02</span><h3>Heating</h3></div><div class="item__body"><div><p>Furnaces, boilers and cold-climate heat pumps that deliver even, cozy warmth, with safety checks on every visit.</p><span class="chip">🔥 98% AFUE furnaces</span></div></div></li>
+          <li class="item"><div class="item__head"><span>03</span><h3>Clean air</h3></div><div class="item__body"><div><p>HEPA filtration, UV purification and whole-home humidity control remove up to 99% of airborne allergens.</p><span class="chip">🍃 MERV 13+ filtration</span></div></div></li>
+          <li class="item"><div class="item__head"><span>04</span><h3>Smart savings</h3></div><div class="item__body"><div><p>Smart thermostats, zoning and annual tune-ups that keep your system efficient and your bills predictable.</p><span class="chip">⚡ Avg. $480 saved / yr</span></div></div></li>
+        </ol>
+      </div>
+
+      <div class="frame">
+        <figure class="shot is-on" style="margin:0">
+          <img src="../assets/img/ac-wall.webp" srcset="../assets/img/ac-wall-sm.webp 640w, ../assets/img/ac-wall.webp 1200w" sizes="(max-width:900px) 100vw, 640px" alt="Wall-mounted air conditioner">
+          <span class="hot" style="--x:30%;--y:30%"><i></i><b>Up to 26 SEER2</b></span>
+          <span class="hot" style="--x:58%;--y:58%"><i></i><b>Whisper-quiet 19 dB</b></span>
+          <span class="hot hot--l" style="--x:82%;--y:20%"><i></i><b>Wi-Fi control</b></span>
+        </figure>
+        <figure class="shot" style="margin:0">
+          <img src="../assets/img/tech-4.webp" srcset="../assets/img/tech-4-sm.webp 640w, ../assets/img/tech-4.webp 1000w" sizes="(max-width:900px) 100vw, 640px" alt="Technician servicing a furnace" loading="lazy">
+          <span class="hot" style="--x:22%;--y:30%"><i></i><b>98% AFUE efficiency</b></span>
+          <span class="hot hot--l" style="--x:80%;--y:48%"><i></i><b>CO safety test</b></span>
+          <span class="hot" style="--x:28%;--y:72%"><i></i><b>Same-day repair</b></span>
+        </figure>
+        <figure class="shot" style="margin:0">
+          <img src="../assets/img/purifier.webp" srcset="../assets/img/purifier-sm.webp 640w, ../assets/img/purifier.webp 1200w" sizes="(max-width:900px) 100vw, 640px" alt="Air purifier" loading="lazy">
+          <span class="hot" style="--x:28%;--y:58%"><i></i><b>HEPA H13 filter</b></span>
+          <span class="hot hot--l" style="--x:78%;--y:28%"><i></i><b>UV-C purification</b></span>
+          <span class="hot hot--l" style="--x:85%;--y:72%"><i></i><b>Quiet sleep mode</b></span>
+        </figure>
+        <figure class="shot" style="margin:0">
+          <img src="../assets/img/thermostat.webp" srcset="../assets/img/thermostat-sm.webp 640w, ../assets/img/thermostat.webp 1200w" sizes="(max-width:900px) 100vw, 640px" alt="Smart thermostat on a wall" loading="lazy">
+          <span class="hot hot--l" style="--x:52%;--y:36%"><i></i><b>Learns your schedule</b></span>
+          <span class="hot hot--l" style="--x:68%;--y:64%"><i></i><b>Control from your phone</b></span>
+          <span class="hot hot--l" style="--x:46%;--y:78%"><i></i><b>Saves 8–12%</b></span>
+        </figure>
+        <span class="frame__tag" data-tag>01 / 04 · Cooling</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="spacer spacer--end"><p>End of section</p><a href="index.html">← Back to all options</a></div>
+<a class="ph-back" href="index.html">← All options</a>
+
+<script>
+  const story = document.querySelector('[data-story]');
+  const items = [...document.querySelectorAll('.item')];
+  const shots = [...document.querySelectorAll('.shot')];
+  const tag = document.querySelector('[data-tag]');
+  const names = ['Cooling', 'Heating', 'Clean air', 'Smart savings'];
+  let active = -1;
+  const setStep = (i) => {
+    if (i === active) return;
+    active = i;
+    items.forEach((el, k) => el.classList.toggle('is-active', k === i));
+    shots.forEach((el, k) => el.classList.toggle('is-on', k === i));
+    tag.textContent = `0${i + 1} / 04 · ${names[i]}`;
+  };
+  const tick = () => {
+    const r = story.getBoundingClientRect();
+    const p = Math.min(1, Math.max(0, -r.top / (r.height - innerHeight)));
+    setStep(Math.min(3, Math.floor(p * 4 * 0.999)));
+    requestAnimationFrame(tick);
+  };
+  setStep(0);
+  requestAnimationFrame(tick);
+</script>
+</body>
+</html>
